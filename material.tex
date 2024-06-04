@@ -122,7 +122,6 @@ dove $K'$ è definito come segue:
 	\item Se $K$ è esattamente di $B$ byte, $K'$ è uguale a $K$.
 \end{itemize}
 
-
 \section{RSASSA}
 RSASSA è una variazione dell'algoritmo RSA, che è un algoritmo di crittografia a chiave pubblica, adattato alle firme.
 
@@ -168,14 +167,14 @@ Per verificare la firma invece:
 	\item Se i due digest sono uguali, la firma è valida.
 \end{enumerate}
 
-Questo processo è conosciuto come "Signature Scheme with Appendix" (SSA).
+Questo processo è conosciuto come Signature Scheme with Appendix (SSA).
 La firma è un "appendice" del messaggio originale in quanto è necessario nel processo di verifica della firma.
 
 In una firma con RSA la chiave privata viene utilizzata creare una firma che per verificarne l'autenticità.
 In contrasto, la chiave pubblica può essere utilizzata solo per verificare l'autenticità di un messaggio.
 Questo schema permette dunque la possibilità di distribuire in modo sicuro uno-a-molti messaggi firmati: le parti riceventi possono verificare l'autenticità del messaggio mantenendo una copia della chiave pubblica, ma non possono creare nuovi messaggi con essa.
 
-\section{ECDSA}
+\section{ECC}
 L'esistenza di algoritmi di fattorizzazione efficienti come il General Number Field Sieve (GNFS) o il Quadratic Sieve (QS) ha reso RSA con chiavi brevi vulnerabile.
 Tuttavia, all'aumentare dei numeri da fattorizzare, non solo gli algoritmi di fattorizzazione diventano più efficienti, ma anche l'algoritmo RSA diventa più lento, richiedendo chiavi che crescono ancora più velocemente.
 Questo diventa un problema insostenibile sul lungo periodo, in particolare per dispositivi con risorse limitate.
@@ -183,7 +182,7 @@ Ciò può potenzialmente rendere RSA insicuro e non più utilizzabile.
 
 Algoritmi a curva ellittica sono un'alternativa più efficiente a RSA.
 Tra questi, l'Elliptic Curve Diffie-Hellman (ECDH) per lo scambio di chiavi e l'Elliptic Curve Digital Signature Algorithm (ECDSA) per la firma digitale sono i più comuni.
-Anche questi algoritmi generano una coppia di chiavi privata/pubblica, ma utilizza, invece della fattorizzazione di numeri semiprimi, il logaritmo discreto su curve ellittiche.
+Anche questo tipo di algoritmi genera una coppia di chiavi privata/pubblica, ma utilizza, invece della fattorizzazione di numeri semiprimi, il logaritmo discreto su curve ellittiche.
 Le curve ellittiche per la crittografia sono definite dalla seguente equazione di terzo grado:
 
 $$y^2 = x^3 + ax + b$$
@@ -194,23 +193,77 @@ Gli algoritmi a curve ellittiche sono definiti su campi primi finiti, ovvero ins
 Con campo primo finito si intende che il numero di elementi nel campo è un numero primo $p$, quindi una quantità finita. Tutti gli elementi e le operazioni sono definite modulo $p$.
 
 Rendendo il campo finito, gli algoritmi usati per le operazioni matematiche cambiano.
-In particolare, il logaritmo discreto deve essere usato al posto del logaritmo normale.
+In particolare, il logaritmo discreto viene usato al posto del logaritmo normale.
 
 Essendo il campo composto da un numero finito di elementi, si potrebbe pensare che il logaritmo (discreto) diventi un problema semplice, tuttavia, non esiste ad oggi un algoritmo efficiente per la risoluzione del logaritmo discreto su curve ellittiche.
 Questa proprietà rende il logaritmo discreto ideale per la crittografia e la firma digitale.
 
-Per rendere però l'algoritmo sicuro, è necessario che la curva, ovvero i parametri $a$ e $b$, sia scelta in modo corretto. In passato alcune curve ellittiche sono state compromesse a causa di parametri deboli.
+Per rendere però l'algoritmo sicuro, è necessario che la curva, ovvero i parametri $a$ e $b$, sia scelta in modo corretto. In passato, infatti, si sono verificati casi in cui certi parametri hanno reso le curve deboli.
 
 L'aspetto interessante degli algoritmi a curva ellittica è che la lunghezza della chiave può essere ridotta di molto rispetto a RSA per ottenere lo stesso livello di sicurezza.
-Ad esempio, una chiave ECC a 256 bit è considerata sicura quanto una chiave RSA a 3072 bit.
+Ad esempio, una chiave EC a 256 bit è considerata sicura quanto una chiave RSA a 3072 bit.
 
 Ciò, oltre che a rendere più efficienti gli algoritmi, semplifica la trasmissione e la memorizzazione delle chiavi.
-Il motivo per cui la chiave ECC può essere più corta risiede nell'inesistenza, ad oggi, di algoritmi che risolvono il logaritmo discreto più efficientemente dell'approccio naive o brute-force.
+Il motivo per cui la chiave EC può essere più corta risiede nell'inesistenza, ad oggi, di algoritmi che risolvono il logaritmo discreto più efficientemente dell'approccio naive o brute-force, diversamente da RSA che è più vulnerabile a fattorizzazione efficiente.
 
 In un suo studio, il matematico Arjen K. Lenstra ha esposto il concetto di "Universal Security" calcolando l'energia necessaria per rompere determinti algoritmi crittografici e comparandola con la quantità di acqua che quell'energia sarebbe in grado di portare a ebollizione.
 Con questo metodo, Lenstra ha dimostrato che per rompere una chiave RSA di 228 bit è richiesta meno energia di quella necessaria per portare a ebollizione un cucchiaino d'acqua.
-Al contrario, per rompere una chiave ECC a 228 bit è necessaria una quantità di energia che porterebbe a ebollizione l'intera acqua presente sulla Terra.
+Al contrario, per rompere una chiave EC a 228 bit è necessaria una quantità di energia che porterebbe a ebollizione l'intera acqua presente sulla Terra.
 Per questo livello di sicurezza con RSA è necessaria una chiave di almeno 2380 bit.
+
+\subsection{Usi di ECC}
+Nonostante la sua sicurezza e la sua efficienza, l'uso di ECC è ancora limitato rispetto a RSA.
+Tuttavia negli ultimi anni si è assistito ad un aumento dell'interesse per questa tecnologia e ad un incremento del suo utilizzo in varie applicazioni.
+Il governo degli Stati Uniti, ad esempio, ha adottato ECC per la crittografia delle comunicazioni, il progetto Tor lo utilizza per aiutare a garantire l'anonimato degli utenti e il protocollo TLS lo utilizza per garantire la sicurezza delle comunicazioni su Internet tramite HTTPS.
+Anche il servizio di messaggistica di Apple iMessage utilizza ECC per garantire la sicurezza delle comunicazioni. ECC è inoltre utilizzato in molte applicazioni di blockchain, come Bitcoin ed Ethereum, al fine di approvare le transazioni.
+
+\section{Diffie Hellman Key Exchange}
+Il Diffie-Hellman Key Exchange (D-H) è un protocollo crittografico che permette a due parti che non hanno una conoscenza pregressa di stabilire una chiave segreta condivisa su un canale di comunicazione non sicuro.
+Questo protocollo fornisce le basi per una varietà di diversi protocolli crittografici. In particolare, è alla base della perfetta segretezza di TLS, il protocollo utilizzato da HTTP(S) per garantire la sicurezza delle comunicazioni.
+Il protocollo originale, sviluppato da Whitfield Diffie e Martin Hellman nel 1976, non prevedeva la firma digitale e quindi non garantiva l'autenticità delle parti coinvolte nella comunicazione, rendendo il protocollo vulnerabile al Man-in-the-middle Attack (MITM).
+
+L'algoritmo si basa sulla difficoltà di calcolare il logaritmo discreto su campi finiti.
+Inizialmente, le due parti scelgono un numero primo $p$ e un generatore $g$ del campo finito tale che $g^x \mod p$, per $x = 1, 2, ..., p-1$, generi tutti gli elementi del campo in qualche permutazione.
+Per ogni intero $b$ minore di $p$ e radice primitiva di $p$, esiste un unico esponente $i$ tale che $b = a^i \mod p$. Questo esponente è chiamato logaritmo discreto di $b$ in base $a$ modulo $p$.
+
+Supponiamo che utente A e utente B vogliano stabilire una chiave segreta condivisa. Il protocollo funziona come segue:
+un numero primo $p$ e un intero $\alpha$, che è una radice primitiva di $p$, vengono scelti e resi pubblici. Gli utenti A e B scelgono in modo casuale rispettivamente due numeri segreti $X_a$ e $X_b$ minori di $p$ e calcolano $Y_a = \alpha^{X_a} \mod p$ e $Y_b = \alpha^{X_b} \mod p$.
+Dopodiché, A e B scambiano i loro valori pubblici $Y_a$ e $Y_b$ mantenendo segreti i loro valori privati $X_a$ e $X_b$.
+Infine, A calcola $K = Y_b^{X_a} \mod p$ e B calcola $K = Y_a^{X_b} \mod p$. Entrambi otterranno lo stesso valore $K$ che sarà la chiave segreta condivisa.
+Infatti:
+
+\begin{equation}
+	\begin{aligned}
+		&K = Y_b^{X_a} \mod p \\
+		&= (\alpha^{X_b} \mod p)^{X_a} \mod p \\
+		&= \alpha^{X_a \cdot X_b} \mod p \\
+		&= \alpha^{X_b \cdot X_a} \mod p \\
+		&= (\alpha^{X_a} \mod p)^{X_b} \mod p \\
+		&= Y_a^{X_b} \mod p = K
+	\end{aligned}
+\end{equation}
+
+In questo modo i due utenti si sono scambiati una chiave segreta senza che nessuno dei due abbia mai inviato la propria chiave privata.
+Inoltre, un attaccante che intercetta i valori pubblici $Y_a$ e $Y_b$ non può risalire ai valori privati $X_a$ e $X_b$ senza conoscere il logaritmo discreto su campi finiti.
+La sicurezza del protocollo si basa sulla relativa facilità di calcolare esponenziali modulari e la difficoltà di calcolare logaritmi discreti. In particolare, per primi grandi, quest'ultima operazione è considerata infattibile.
+
+\subsection{Autenticazione in Diffie Hellman}
+Il protocollo D-H originale non prevedeva l'autenticazione delle parti coinvolte nella comunicazione, rendendolo vulnerabile a MITM e Impersonation Attack.
+
+Nell'Impersonation Attack, l'attaccante intercetta un messaggio di A indirizzato a B, contenente la chiave pubblica $Y_a$, e invia ad A la propria chiave pubblica $Y_{att}$ con l'User ID di B.
+In questo modo A genera la chiave segreta condivisa credendo di star comunicando con B.
+
+Nel Man-in-the-Middle Attack, un attaccante si interpone tra le due parti e stabilisce due connessioni separate, una con A e una con B, impersonando entrambe le parti.
+
+Si può notare come il protocollo è soggetto a questo tipo di attacchi in quanto non è presente nessun tipo di autenticazione tra le parti.
+Esistono generalmente tre metodi differenti per garantire l'autenticità delle parti in D-H:
+\begin{itemize}
+	\item \textbf{Firma Digitale}: Lo scambio di chiavi è autenticato da una firma, ovvero un hash ottenibile da entrambi gli utenti, ciascuno crittografato con la propria chiave privata. Questo hash viene generato da parametri importanti come l'User ID.
+	\item \textbf{Cifratura a chiave pubblica}: Alcuni parametri importanti vengono crittografati con la propria chiave privata.
+	\item \textbf{Chiave simmetrica}: Una chiave simmetrica condivisa attraverso altri mezzi viene utilizzata per autenticare la comunicazione.
+\end{itemize}
+
+\subsection{Diffie Hellman Key Exchange con Curve Ellittiche}
 
 \section{Considerazioni sulla Sicurezza di JWT}
 Essendo il token firmato, non è possibile modificarlo senza invalidare la firma.
