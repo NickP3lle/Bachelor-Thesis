@@ -17,6 +17,11 @@
 
 \maketitle
 
+
+% Computer_Security_Principles_and_Practice_(3rd_Edition)
+% dentro a cybersecurity principles and practices folder per introduzione all'autenticazione con vari tipi tra password, token etc
+
+
 \section{Introduzione}
 JSON Web Token (JWT) è uno standard aperto (RFC 7519) che definisce un modo compatto per trasmettere informazioni in modo sicuro tra due parti come oggetti JSON.
 Queste informazioni possono essere verificate e attendibili perché sono firmate digitalmente.
@@ -128,7 +133,8 @@ RSASSA è una variazione dell'algoritmo RSA, che è un algoritmo di crittografia
 Gli algoritmi a chiave pubblica si basano sulla generazione di due chiavi, una privata e una pubblica, per crittografare e decrittografare rispettivamente i dati.
 
 \subsection{RSA}
-L'algoritmo RSA si basa sul fatto che la fattorizzare un numero intero composto è considerato un problema difficile e può essere rappresentato come segue:
+L'algoritmo RSA si basa sul fatto che la fattorizzare un numero intero composto è considerato un problema difficile.
+Questo problema può essere rappresentato come segue:
 
 $$(m^e)^d \equiv m \mod n$$
 
@@ -215,9 +221,45 @@ Per questo livello di sicurezza con RSA è necessaria una chiave di almeno 2380 
 Nonostante la sua sicurezza e la sua efficienza, l'uso di ECC è ancora limitato rispetto a RSA.
 Tuttavia negli ultimi anni si è assistito ad un aumento dell'interesse per questa tecnologia e ad un incremento del suo utilizzo in varie applicazioni.
 Il governo degli Stati Uniti, ad esempio, ha adottato ECC per la crittografia delle comunicazioni, il progetto Tor lo utilizza per aiutare a garantire l'anonimato degli utenti e il protocollo TLS lo utilizza per garantire la sicurezza delle comunicazioni su Internet tramite HTTPS.
-Anche il servizio di messaggistica di Apple iMessage utilizza ECC per garantire la sicurezza delle comunicazioni. ECC è inoltre utilizzato in molte applicazioni di blockchain, come Bitcoin ed Ethereum, al fine di approvare le transazioni.
+Anche i servizi di messaggistica di iMessage e Whatsapp utilizzano ECC per garantire la sicurezza delle loro comunicazioni.
+ECC è inoltre utilizzato in molte applicazioni di blockchain, come Bitcoin ed Ethereum, al fine di approvare le transazioni.
 
-\section{Diffie Hellman Key Exchange}
+\subsection{Elliptic Curve Digital Signature Algorithm (ECDSA)}
+L'Elliptic Curve Digital Signature Algorithm è un algoritmo di firma digitale basato su curve ellittiche.
+Il funzionamento è simile a quello di RSA, ma utilizza curve ellittiche al posto dei numeri interi.
+Immaginiamo che User A voglia inviare un messaggio firmato a User B.
+A sceglie in modo randomico un numero $d_A$ nel range $[1, n-1]$, che rappresenta la chiave private e dove $n$ è l'ordine del punto base $G$ della curva ellittica ed è un numero primo.
+A questo punto, A calcola il punto $Q_A = d_A \cdot G$ e la coordinata $x$ di $Q_A$. Il risultato è un punto della curva che rappresenta la chiave pubblica.
+La curva ellittica e i suoi parametri (inclusi $G$ e $n$) vengono prestabiliti in base a uno standard crittografico.
+
+Dunque, per firmare un messaggo User A procede come segue:
+\begin{enumerate} % firma e verifica sono da controllare
+	\item Calcola il digest $H(m)$ del messaggio $m$ con una funzione hash crittografica.
+	\item $H(m)$ viene poi convertito in un numero intero intero $h$ ridotto modulo $n$.
+	\item Un numero $k$ viene scelto randomicamente nel range $[1, n-1]$.
+	\item Calcola il punto $k \cdot G$ e la sua coordinata $x$ viene ridotta modulo $n$, ottenendo $r$. Se $r = 0$, viene scelto un nuovo $k$.
+	\item Calcola $s = (h + rd_A)/k \mod n$. Se $s = 0$, viene scelto un nuovo $k$.
+	\item La coppia $(r, s)$ è la firma del messaggio.
+\end{enumerate} % firma e verifica sono da controllare
+
+È importante notare che $k$ deve essere scelto in modo randomico e non deve essere mai riutilizzato con la stessa chiave privata.
+L'utilizzo di $k$ più volte con la stessa chiave privata può portare alla compromissione della chiave privata.
+
+Per verificare la firma User B procede come segue:
+\begin{enumerate} % firma e verifica sono da controllare
+	\item Verifica che $r$ e $s$ siano nel range $[1, n-1]$ e che $Q_A$ sia un punto sulla curva il cui prodotto con $n$ è l'elemento neutro.
+	\item Calcola il digest $H(m)$ del messaggio $m$ con una funzione hash crittografica.
+	\item $H(m)$ viene poi convertito in un numero intero intero $h$ ridotto modulo $n$.
+	\item Calcola $w = s^{-1} \mod n$.
+	\item Calcola $u_1 = hw \mod n$ e $u_2 = rw \mod n$.
+	\item Calcola il punto $u_1 \cdot G + u_2 \cdot Q_A$ e la sua coordinata $x$ viene ridotta modulo $n$, ottenendo $v$.
+	\item La firma è valida se $v = r$.
+\end{enumerate} % firma e verifica sono da controllare
+
+\subsection{ECDSA for Bitcoin}
+
+
+\section{Diffie Hellman Key Exchange (D-H)}
 Il Diffie-Hellman Key Exchange (D-H) è un protocollo crittografico che permette a due parti che non hanno una conoscenza pregressa di stabilire una chiave segreta condivisa su un canale di comunicazione non sicuro.
 Questo protocollo fornisce le basi per una varietà di diversi protocolli crittografici. In particolare, è alla base della perfetta segretezza di TLS, il protocollo utilizzato da HTTP(S) per garantire la sicurezza delle comunicazioni.
 Il protocollo originale, sviluppato da Whitfield Diffie e Martin Hellman nel 1976, non prevedeva la firma digitale e quindi non garantiva l'autenticità delle parti coinvolte nella comunicazione, rendendo il protocollo vulnerabile al Man-in-the-middle Attack (MITM).
@@ -263,7 +305,25 @@ Esistono generalmente tre metodi differenti per garantire l'autenticità delle p
 	\item \textbf{Chiave simmetrica}: Una chiave simmetrica condivisa attraverso altri mezzi viene utilizzata per autenticare la comunicazione.
 \end{itemize}
 
-\subsection{Diffie Hellman Key Exchange con Curve Ellittiche}
+\subsection{Diffie Hellman Key Exchange con Curve Ellittiche (ECDH)}
+Il Diffie-Hellman Key Exchange può essere implementato anche con curve ellittiche.
+User A and B scelgono una curva ellittica $E(a,b)$ e un punto $G$ su di essa, che funge da generatore. Questi parametri vengono resi pubblici.
+A e B scelgono, a questo punto, due numeri casuali e segreti $X_a$ e $X_b$ e calcolano rispettivamente $Y_a = X_a \cdot G$ e $Y_b = X_b \cdot G$, dove $\cdot$ indica il prodotto scalare.
+A e B si scambiano i valori pubblici $Y_a$ e $Y_b$ e calcolano grazie ad essi la chiave segreta condivisa $K$.
+\begin{equation}
+	\begin{aligned}
+		&K = X_a \cdot Y_b\\
+		&= X_a \cdot (X_b \cdot G)\\
+		&= X_b \cdot (X_a \cdot G)\\
+		&= X_b \cdot Y_a = K
+	\end{aligned}
+\end{equation}
+
+Anche in questo caso, un utente malevolo che intercetta i valori pubblici $Y_a$ e $Y_b$ non può risalire ai valori privati $X_a$ e $X_b$ senza conoscere il logaritmo discreto su curve ellittiche e quindi non può ottenere la chiave segreta condivisa.
+
+Come per il D-H con numeri interi, anche ECDH non prevede l'autenticazione delle parti coinvolte nella comunicazione e quindi è vulnerabile a MITM Attack.
+
+% \subsection{Diffie Hellman Key Exchange con Curve Ellittiche e Firma Digitale (ECDHE)}
 
 \section{Considerazioni sulla Sicurezza di JWT}
 Essendo il token firmato, non è possibile modificarlo senza invalidare la firma.
@@ -318,6 +378,8 @@ Risorse per questo articolo:
 	\item ECC Wikipedia: \href{https://en.wikipedia.org/wiki/Elliptic-curve_cryptography}{wikipedia.org/wiki/Elliptic-curve\_cryptography}
 	\item ECC Cloudflare Article: \href{https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/}{cloudflare.com/elliptic-curve-cryptography}
 	\item Universal Security: \href{https://eprint.iacr.org/2013/635.pdf}{eprint.iacr.org/2013/635.pdf}
+	\item Diffie Hellman Key Exchange: \href{https://ieeexplore.ieee.org/document/5485276}{ieeexplore.ieee.org/document/5485276}
+	\item Elliptic Curve Diffie Hellman: \href{https://ieeexplore.ieee.org/document/8192159}{ieeexplore.ieee.org/document/8192159}
 \end{itemize}
 
 \end{document}
