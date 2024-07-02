@@ -5,7 +5,6 @@
 \date{April 15, 2024}
 
 \usepackage{graphicx}
-% \usepackage{animate}
 \usepackage{hyperref}
 \usepackage{parskip}
 \usepackage{bookmark}
@@ -257,6 +256,7 @@ Per verificare la firma User B procede come segue:
 \end{enumerate} % firma e verifica sono da controllare
 
 \subsection{ECDSA for Bitcoin}
+L'algortimo ECDSA è estensivamente utilizzato in Bitcoin, come anche in Ethereum e in molte altre criptovalute, per validare le transazioni.
 
 
 \section{Diffie Hellman Key Exchange (D-H)}
@@ -323,8 +323,6 @@ Anche in questo caso, un utente malevolo che intercetta i valori pubblici $Y_a$ 
 
 Come per il D-H con numeri interi, anche ECDH non prevede l'autenticazione delle parti coinvolte nella comunicazione e quindi è vulnerabile a MITM Attack.
 
-% \subsection{Diffie Hellman Key Exchange con Curve Ellittiche e Firma Digitale (ECDHE)}
-
 \section{Considerazioni sulla Sicurezza di JWT}
 Essendo il token firmato, non è possibile modificarlo senza invalidare la firma.
 Tuttavia, bisogna considerare alcuni aspetti per garantirne la sicurezza, come la protezione delle chiavi, quella privata nel caso asimmetrico e quella segreta nel caso simmetrico.
@@ -375,11 +373,14 @@ Risorse per questo articolo:
 	\item The JWT Handbook: \href{https://auth0.com/resources/ebooks/jwt-handbook}{auth0.com/resources/ebooks/jwt-handbook}
 	\item Access Tokens vs Refresh Tokens: \href{https://datatracker.ietf.org/doc/html/rfc6749#section-1.4}{ietf.org/doc/html/rfc6749}
 	\item RFC 7519: \href{https://datatracker.ietf.org/doc/html/rfc7519}{ietf.org/doc/html/rfc7519}
-	\item ECC Wikipedia: \href{https://en.wikipedia.org/wiki/Elliptic-curve_cryptography}{wikipedia.org/wiki/Elliptic-curve\_cryptography}
+	\item ECC Wikipedia: \href{https://en.wikipedia.org/wiki/Elliptic-curve_cryptography}{wikipedia.org/wiki/Elliptic-curve-cryptography}
 	\item ECC Cloudflare Article: \href{https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/}{cloudflare.com/elliptic-curve-cryptography}
 	\item Universal Security: \href{https://eprint.iacr.org/2013/635.pdf}{eprint.iacr.org/2013/635.pdf}
 	\item Diffie Hellman Key Exchange: \href{https://ieeexplore.ieee.org/document/5485276}{ieeexplore.ieee.org/document/5485276}
 	\item Elliptic Curve Diffie Hellman: \href{https://ieeexplore.ieee.org/document/8192159}{ieeexplore.ieee.org/document/8192159}
+	\item ECDSA: \href{https://datatracker.ietf.org/doc/html/rfc6979}{ietf.org/doc/html/rfc6979}
+	\item ECDSA Wikipedia: \href{https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm}{wikipedia.org/wiki/EC-Digital-Signature-Algorithm}
+	\item EC Point Multiplication: \href{https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication}{wikipedia.org/wiki/EC-point-multiplication}
 \end{itemize}
 
 \end{document}
