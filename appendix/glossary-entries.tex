@@ -1,10 +1,3 @@
-% Acronyms
-% \newacronym[description={\glslink{apig}{Application Program Interface}}]
-%     {api}{API}{Application Program Interface}
-
-% \newacronym[description={\glslink{jwtg}{JSON Web Token}}]
-%     {jwt}{JWT}{JSON Web Token}
-
 % Glossary entries
 \newglossaryentry{JWT} {
     % name=\glslink{jwt}{JWT},
@@ -19,7 +12,7 @@
     name=Token,
     text=token,
     sort=token,
-    description={un \emph{token} è un oggetto simbolico, generalmente una stringa di caratteri, che rappresenta un insieme di permessi o dati di autenticazione. Viene generalmente utilizzato per verificare l'identità di un utente o di un'applicazione durante le comunicazioni con un server.}
+    description={un \emph{token} è un oggetto simbolico, generalmente una stringa di caratteri, che rappresenta un insieme di permessi o dati di autenticazione. Viene generalmente utilizzato per verificare l'identità di un utente o di un'applicazione durante le comunicazioni con un server}
 }
 
 \newglossaryentry{API} {
@@ -27,7 +20,7 @@
     name=API,
     text=Application Programming Interface (API),
     sort=api,
-    description={una \emph{Application Programming Interface} (ing. interfaccia di programmazione di un'applicazione) è un insieme di regole e protocolli che permette a diverse applicazioni software di comunicare tra loro. Le \emph{API} definiscono i metodi e i dati che le applicazioni possono utilizzare per richiedere servizi e scambiare informazioni, facilitando l'interoperabilità e l'integrazione tra sistemi diversi.}
+    description={una \emph{Application Programming Interface} (ing. interfaccia di programmazione di un'applicazione) è un insieme di regole e protocolli che permette a diverse applicazioni software di comunicare tra loro. Le \emph{API} definiscono i metodi e i dati che le applicazioni possono utilizzare per richiedere servizi e scambiare informazioni, facilitando l'interoperabilità e l'integrazione tra sistemi diversi}
 }
 
 \newglossaryentry{web cookie} {
@@ -49,4 +42,74 @@
     text=Internet of Things (IoT),
     sort=iot,
     description={l'\emph{Internet of Things} (ing. Internet delle cose) è un concetto che si riferisce alla connessione di dispositivi fisici, come elettrodomestici, veicoli e sensori, alla rete Internet. Questi dispositivi possono comunicare tra loro e con altri sistemi, raccogliendo e scambiando dati per automatizzare processi e migliorare l'efficienza e la qualità della vita}
+}
+
+\newglossaryentry{JSON} {
+    name=JSON,
+    text=JSON,
+    sort=json,
+    description={\emph{JavaScript Object Notation} (ing. notazione di un oggetto \emph{JavaScript}) è un formato di scambio dati leggero e indipendente dal linguaggio di programmazione. È basato su un sottoinsieme del linguaggio di programmazione JavaScript e viene utilizzato per rappresentare oggetti e dati in modo comprensibile ma allo stesso tempo facile da interpretare per i computer}
+}
+
+\newglossaryentry{HMAC} {
+    name=HMAC,
+    text=HMAC,
+    sort=hmac,
+    description={\emph{Hash-based Message Authentication Code} (ing. codice di autenticazione del messaggio basato su \emph{hash}) è una tecnica di autenticazione basata su funzioni di \emph{hash crittografiche}. Un \emph{HMAC} consente a entrambe le parti di una comunicazione di verificare l'integrità e l'autenticità dei dati scambiati, utilizzando una chiave segreta condivisa}
+}
+
+\newglossaryentry{RSA} {
+    name=RSA,
+    text=RSA,
+    sort=rsa,
+    description={\emph{RSA} è un algoritmo di crittografia asimmetrica basato su due chiavi, una pubblica e una privata. Il nome RSA deriva dai cognomi dei suoi inventori, Ron Rivest, Adi Shamir e Leonard Adleman}
+}
+
+\newglossaryentry{ECC} {
+    name=ECC,
+    text=ECC,
+    sort=ecc,
+    description={\emph{Elliptic Curve Cryptography} (ing. crittografia a curve ellittiche) è una tecnica di crittografia asimmetrica basata su curve ellittiche algebriche. Le curve ellittiche sono utilizzate per generare coppie di chiavi pubbliche e private, che possono essere utilizzate per crittografare e decrittografare i dati}
+}
+
+\newglossaryentry{SSO} {
+    name=SSO,
+    text=Singe Sign-On (SSO),
+    sort=sso,
+    description={\emph{Single Sign-On} (ing. accesso singolo) è un metodo di autenticazione che consente a un utente di accedere a più applicazioni o servizi con un'unica identità digitale. L'utente effettua l'accesso una sola volta e può accedere a tutte le risorse autorizzate senza dover effettuare l'accesso ripetutamente}
+}
+
+\newglossaryentry{Base64} {
+    name=Base64,
+    text=Base64,
+    sort=base64,
+    description={\emph{Base64} è una tecnica di codifica che consente di rappresentare dati binari in una forma leggibile e trasferibile tramite testo. La codifica \emph{Base64} converte i dati binari in una sequenza di caratteri \emph{ASCII}, che possono essere facilmente trasferiti tramite protocolli di comunicazione testuale}
+}
+
+\newglossaryentry{URL} {
+    name=URL,
+    text=URL,
+    sort=url,
+    description={\emph{Uniform Resource Locator} (ing. localizzatore uniforme di risorse) è l'indirizzo di un documento o di una risorsa su Internet. Un \emph{URL} specifica il protocollo di comunicazione da utilizzare, il nome del server, il percorso della risorsa e altri parametri necessari per accedere alla risorsa}
+}
+
+\newglossaryentry{JWE} {
+    name=JWE,
+    text=JSON Web Encryption (JWE),
+    sort=jwe,
+    description={\emph{JSON Web Encryption} (ing. crittografia di un oggetto \emph{JSON}) è uno standard che definisce un modo per crittografare i contenuti di un \emph{JSON Web Token}. Il \emph{JWE} consente di proteggere i dati sensibili contenuti in un \emph{JWT} utilizzando algoritmi di crittografia simmetrica o asimmetrica}
+}
+
+\newglossaryentry{JWS} {
+    name=JWS,
+    text=JSON Web Signature (JWS),
+    sort=jws,
+    description={\emph{JSON Web Signature} (ing. firma di un oggetto \emph{JSON}) è uno standard che definisce un modo per firmare digitalmente un \emph{JSON Web Token}. Il \emph{JWS} consente di verificare l'autenticità e l'integrità dei dati contenuti in un \emph{JWT} utilizzando algoritmi di firma crittografica}
+}
+
+\newglossaryentry{JWA} {
+    name=JWA,
+    text=JSON Web Algorithms (JWA),
+    sort=jwa,
+    description={\emph{JSON Web Algorithms} (ing. algoritmi di un oggetto \emph{JSON}) è uno standard che definisce gli algoritmi crittografici utilizzati per firmare e crittografare i contenuti di un \emph{JSON Web Token}. Il \emph{JWA} specifica i tipi di algoritmi supportati e le modalità di utilizzo}
 }

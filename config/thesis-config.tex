@@ -63,9 +63,6 @@
 \DeclareBibliographyCategory{opere}
 \DeclareBibliographyCategory{web}
 
-% \addtocategory{opere}{womak:lean-thinking}
-% \addtocategory{web}{site:agile-manifesto}
-
 \defbibheading{opere}{\section*{Riferimenti bibliografici}}
 \defbibheading{web}{\section*{Siti Web consultati}}
 
@@ -136,56 +133,6 @@
 \newcommand{\glsfirstoccur}{\ap{{[g]}}}
 
 \newcommand{\intro}[1]{\emph{\textsf{#1}}}
-
-% Risks environment
-\newcounter{riskcounter}                % define a counter
-\setcounter{riskcounter}{0}             % set the counter to some initial value
-
-%%%% Parameters
-% #1: Title
-\newenvironment{risk}[1]{
-    \refstepcounter{riskcounter}        % increment counter
-    \par \noindent                      % start new paragraph
-    \textbf{\arabic{riskcounter}. #1}   % display the title before the content of the environment is displayed
-}{
-    \par\medskip
-}
-
-% Commentare da questa riga
-\newcommand{\riskname}{Rischio}
-
-\newcommand{\riskdescription}[1]{\textbf{\\Descrizione:} #1.}
-
-\newcommand{\risksolution}[1]{\textbf{\\Soluzione:} #1.}
-
-% Use case environment
-\newcounter{usecasecounter}             % define a counter
-\setcounter{usecasecounter}{0}          % set the counter to some initial value
-
-%%%% Parameters
-% #1: ID
-% #2: Nome
-\newenvironment{usecase}[2]{
-    \renewcommand{\theusecasecounter}{\usecasename #1}  % this is where the display of
-                                                        % the counter is overwritten/modified
-    \refstepcounter{usecasecounter}             % increment counter
-    \vspace{10pt}
-    \par \noindent                              % start new paragraph
-    {\large \textbf{\usecasename #1: #2}}       % display the title before the
-                                                % content of the environment is displayed
-    \medskip
-}{
-    \medskip
-}
-
-\newcommand{\usecasename}{UC}
-
-\newcommand{\usecaseactors}[1]{\textbf{\\Attori Principali:} #1. \vspace{4pt}}
-\newcommand{\usecasepre}[1]{\textbf{\\Precondizioni:} #1. \vspace{4pt}}
-\newcommand{\usecasedesc}[1]{\textbf{\\Descrizione:} #1. \vspace{4pt}}
-\newcommand{\usecasepost}[1]{\textbf{\\Postcondizioni:} #1. \vspace{4pt}}
-\newcommand{\usecasealt}[1]{\textbf{\\Scenario Alternativo:} #1. \vspace{4pt}}
-% Fino a questa riga
 
 % Namespace description environment
 \newenvironment{namespacedesc}{

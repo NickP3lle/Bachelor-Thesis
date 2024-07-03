@@ -7,7 +7,7 @@
 Il processo dell'autenticazione è l'atto di verificare le credenziali dell'utente in termini di correttezza o tempo\footcite{site:token-cookie-auth}.
 
 Per correttezza si intende che le credenziali siano valide e che l'utente sia chi dice di essere.
-Al momento dell'accesso, un token di autenticazione\footnote{In questo contesto, per token di autenticazione si intende una qualsiasi forma di credeziale di autentiazione} viene assegnato all'utente.
+Al momento dell'accesso, un token di autenticazione\footnote{In questo contesto, per token di autenticazione si intende una qualsiasi forma di credeziale di autentiazione.} viene assegnato all'utente.
 Questo token viene utilizzato per verificare l'identità dell'utente in ogni richiesta successiva.
 
 Per tempo, invece, si intende che l'utente abbia accesso al sistema per un periodo di tempo limitato.
@@ -24,7 +24,7 @@ Un web cookie, o più semplicemente cookie, è un piccolo blocco di dati creato 
 Questi dati sono spesso essenziali per il funzionamento di un sito web, in quanto permettono di memorizzare, oltre alla sessione dell'utente, informazioni salvate dall'utente stesso, come le preferenze sull'aspetto grafico o gli articoli aggiunti al carrello.
 
 L'utilizzo dei cookie per l'autenticazione è considerato l'approccio classico ed è spesso indicato come autenticazione basata su sessione. 
-Questo perché il server li genera con un ID di sessione che memorizza nel proprio database e invia al client\footnote{Il client fa parte dell'architettura client-server ed è l'entità che richiede risorse o servizi da un server. Nel contesto delle applicazioni web, il client è tipicamente rappresentato dal browser web o da un'applicazione che l'utente utilizza per interagire con il server. Il client invia richieste al server e riceve risposte che possono includere dati, pagine web, file o altri contenuti}.
+Questo perché il server li genera con un ID di sessione che memorizza nel proprio database e invia al client\footnote{Il client fa parte dell'architettura client-server ed è l'entità che richiede risorse o servizi da un server. Nel contesto delle applicazioni web, il client è tipicamente rappresentato dal browser web o da un'applicazione che l'utente utilizza per interagire con il server. Il client invia richieste al server e riceve risposte che possono includere dati, pagine web, file o altri contenuti.}.
 Il client, ogni volta che fa una richiesta al server, invia il cookie con l'ID di sessione che il server utilizza per identificare l'utente, verificandone la validità.
 
 L'autenticazione basata su cookie è considerata con stato (dall'inglese \emph{stateful}) in quanto sia il client che il server devono mantenere lo stato della sessione. \\
@@ -49,7 +49,7 @@ L'autenticazione basata su cookie è considerata con stato (dall'inglese \emph{s
 
 \noindent L'utilizzo di cookie per l'autenticazione ha molti vantaggi.
 Il principale è che sono supportati da tutti i browser e sono facili da implementare, in quanto è il browser stesso a gestirne la memorizzazione e l'invio.
-I cookie inoltre necessitano di poca memoria e possono essere utilizzati anche per i sottodomini di un sito web.
+I cookie inoltre necessitano di poca memoria e possono essere utilizzati anche per i \emph{sottodomini} di un sito web.
 
 Tuttavia, l'autenticazione basata su cookie ha anche dei limiti.
 Infatti, essi sono vulnerabili ad attacchi di tipo \emph{Cross-Site Scripting (XSS)} e \emph{Cross-Site Request Forgery (CSRF)} e non sono adatti per le architetture senza stato (dall'inglese \emph{stateless}), come alcuni tipi di \emph{\gls{API}}\glsfirstoccur.
@@ -63,7 +63,7 @@ Un token è un oggetto simbolico rilasciato da un'autorità fidata\footcite{site
 Diversamente dai cookie, i token sono \emph{stateless}, dunque non è necessaria la memorizzazione di alcuna informazione sul server.
 Ciò è possibile perché ogni token contiene tutte le informazioni necessarie per la verifica dell'identità dell'utente e per l'accesso alla risorsa protetta. \\
 
-\noindent Similarmente ai cookie, l'autenticazione basata su token viene effettuata nel seguente modo, come illustrato in figura \ref{fig:auth-token-based}:
+\noindent Analogamente ai cookie, l'autenticazione basata su token viene effettuata nel seguente modo, come illustrato in figura \ref{fig:auth-token-based}:
 \begin{enumerate}
 	\item L'utente che vuole accedere alla risorsa protetta inserisce le proprie credenziali.
 	\item Il server verifica le credenziali e, se corrette, genera un token con tutte le informazioni necessarie per l'accesso alla risorsa protetta.
@@ -99,12 +99,26 @@ L'impossibilità di utilizzare i cookie senza l'ausilio di un browser rende i to
 Per completare questo studio, è stato richiesto di implementare un \emph{ChatBot} in \emph{C\#} per la piattaforma di messaggistica Microsoft Teams utilizzando le \emph{API} di Microsoft Graph e token firmati e crittografati per garantire la sicurezza e la riservatezza di tutti i dati scambiati.
 
 \subsection{Microsoft Teams}
-Microsoft Teams è una piattaforma di messaggistica e collaborazione offerta da Microsoft.
+
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[width=0.3\columnwidth]{descrizione-stage/logo-teams} 
+	\caption{Logo di Microsoft Teams}
+\end{figure}
+
+Microsoft Teams\footcite{site:microsoft-teams} è una piattaforma di messaggistica e collaborazione offerta da Microsoft.
 Essa consente a organizzazioni, team e singoli utenti di comunicare e collaborare con colleghi e clienti in tempo reale tramite chat, videoconferenze e chiamate.
 Il \emph{ChatBot} implementato su questa piattaforma consentirà ai clienti di Prorob S.r.l di interagire con i servizi di Quindi Production Copilot in un modo più semplice e veloce.
 
 \subsection{Microsoft Graph}
-Microsoft Graph è una piattaforma di sviluppo che unifica le \emph{API} di Microsoft 365 e Azure, permettendo alle applicazioni sviluppate da terze parti di interagire con i dati memorizzati nei vari servizi di Microsoft.
+
+\begin{figure}[!ht] 
+	\centering 
+	\includegraphics[width=0.3\columnwidth]{descrizione-stage/logo-graph} 
+	\caption{Logo di Microsoft Graph}
+\end{figure}
+
+Microsoft Graph\footcite{site:microsoft-graph} è una piattaforma di sviluppo che unifica le \emph{API} di Microsoft 365 e Azure, permettendo alle applicazioni sviluppate da terze parti di interagire con i dati memorizzati nei vari servizi di Microsoft.
 Utilizzando le \emph{API} di Microsoft Graph, il \emph{ChatBot} può interagire con con la chat di Teams, inviando messaggi e ricevendo notifiche.
 
 \section{Obiettivi}

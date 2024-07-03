@@ -1,0 +1,204 @@
+\chapter{Autenticazione con JSON Web Token}
+\label{cap:autenticazione-jwt}
+
+% \intro{Breve introduzione al capitolo}\\
+
+\section{Cosa è un JSON Web Token?}
+
+\emph{JSON Web Token (JWT)} è uno standard aperto (\emph{RFC 7519}\footcite{site:rfc7519}) che definisce un modo compatto per trasmettere informazioni in modo sicuro tra due parti come oggetti \emph{\gls{JSON}}.
+Queste informazioni possono essere verificate e attendibili perché sono firmate digitalmente.
+
+Le firme digitali possono essere generate utilizzando algoritmi \emph{\gls{HMAC}} (chiave segreta), \emph{\gls{RSA}} (coppia chiave pubblica/privata) o \emph{\gls{ECC}} (curve ellittiche).
+
+\noindent I \emph{JWT} vengono utilizzati principalmente per:
+\begin{itemize}
+	\item \textbf{Autenticazione}: Una volta che un utente si è autenticato, il server può generare un \emph{JWT}, che può essere utilizzato per accedere a risorse specifiche senza dover autenticare l'utente ogni volta.
+	      Questo è utile per le \emph{API RESTful}, dove l'autenticazione è necessaria per ogni richiesta.
+	      \emph{SSO} è un altro esempio di utilizzo per l'autorizzazione.
+	\item \textbf{Scambio di informazioni}: Poiché i \emph{JWT} possono essere firmati, si può essere sicuri che il mittente sia chi dice di essere e che i contenuti del messaggio non siano stati alterati.
+\end{itemize}
+
+\subsection{Struttura di un JWT}
+Un \emph{JWT} è composto da tre parti separate da punti: \emph{header}, \emph{payload} e \emph{signature}.
+La struttura generale è come segue:
+
+$$header.payload.signature$$
+
+L'\emph{header} (intestazione) contiene il tipo di algoritmo di firma utilizzato e il tipo di token.
+Questo \emph{JSON} viene poi codificato in \emph{Base64URL}, che è una codifica \emph{\gls{Base64}} sicura per gli \emph{\gls{URL}}.
+
+\noindent Un esempio di \emph{header} in formato \emph{JSON} è il seguente:
+\begin{verbatim}
+{
+	"alg": "HS256",
+	"typ": "JWT"
+}
+\end{verbatim}
+
+Il \emph{payload} (contenuto) contiene le informazioni che si desidera trasmettere, generalmente riguardanti un'entità (solitamente l'utente) e metadati.
+Queste informazioni, come anche quelle contenute nell'\emph{header}, vengono rappresentate sotto forma di coppie chiave-valore chiamate \emph{claim}.
+È importante notare che il \emph{payload} non è crittografato, quindi non dovrebbe contenere informazioni sensibili se il token non viene inviato su una rete sicura.
+Anche il \emph{payload JSON} viene codificato in \emph{Base64URL}.
+
+\noindent Un esempio di \emph{payload} è il seguente:
+\begin{verbatim}
+{
+	"sub": "1234567890",
+	"name": "Nicolò Pellegrinelli",
+	"admin": true
+}
+\end{verbatim}
+
+La \emph{signature} (firma) viene generata combinando le prime due parti con una chiave segreta.
+L'algoritmo di firma specificato nell'\emph{header} determina il metodo esatto utilizzato per calcolare la firma.
+La \emph{firma} è un passaggio critico per garantire l'integrità del token.
+Essa consente di verificare che il contenuto del token non sia stato alterato durante la trasmissione o la memorizzazione.
+Questo è fondamentale in scenari dove la sicurezza e l'affidabilità delle informazioni sono cruciali, come nell'autenticazione e nell'autorizzazione di utenti.
+
+In aggiunta alla protezione dell'integrità, se il token è stato firmato utilizzando una chiave privata, la firma può essere anche utilizzata per autenticare l'identità del mittente.
+Questo processo assicura che il token sia stato emesso da una fonte attendibile e autorizzata, rafforzando ulteriormente la sicurezza del sistema.
+
+Utilizzando la chiave segreta $lrdoyfMvYppQTQC2O0AGVanBCsThRhmV$ il token \emph{JWT} risultante dall'esempphio precedente risulterebbe come segue: \\
+
+
+\noindent \emph{\textcolor{blue}{eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9}}.
+
+\noindent \emph{\textcolor{red}{eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik5pY29sw7IgUGVsbGVncmluZWxsaSIs}}
+\noindent \emph{\textcolor{red}{ImFkbWluIjp0cnVlfQ}}.
+
+\noindent \emph{\textcolor{olive}{ILwwP\_3ZNcV-wf0VMYsD1HFm8CM2GLg-aVDZdvBmI7I}}\\
+
+L'esempio appena mostrato può essere decodificato utilizzando lo strumento online \cite{site:jwt-debugger}.
+
+
+\subsection{Funzionamento di un JWT}
+Quando un utente si autentica, un token \emph{JWT} viene generato e inviato al client.
+Ogni volta che l'utente fa una richiesta al server, il token viene inviato con la richiesta.
+Il server può quindi verificare la firma del token per assicurarsi che sia valido e che l'utente abbia i permessi necessari per accedere alla risorsa richiesta.
+
+Generalmente i token \emph{JWT} hanno una scadenza breve per garantire un livello di sicurezza alto.
+Questi token sono chiamati \emph{Access Token}\footcite{site:rfc6749} e sono quelli utilizzati per l'accesso alle risorse protette.
+Un altro tipo di token è il \emph{Refresh Token}, che viene utilizzato per ottenere un nuovo \emph{Access Token} una volta che il precedente è scaduto.
+I \emph{Refresh Token} hanno una vita più lunga degli \emph{Access Token} e interagiscono con gli authorization server invece di quelli dei resource server.
+
+\section{Standard di sicurezza per JWT}
+I \emph{JWT} sono uno standard aperto e flessibile, il che significa che possono essere utilizzati in molti contesti diversi.
+Tuttavia, per garantire la sicurezza dei token e dei dati che contengono, è importante seguire alcune \emph{best practices}\footnote{Le best practices (migliori pratiche) sono linee guida raccomandate per ottenere risultati ottimali. Seguendo queste linee guida, si possono evitare errori comuni e migliorare efficienza, qualità e sicurezza di processi e prodotti.} e standard di sicurezza.
+
+\subsection{JSON Web Encryption}
+Il \emph{\gls{JWE}} standard stabilisce un modo per crittografare, e quindi rendere oscuri, i contenuti di un \emph{JWT}.
+A primo impatto, potrebbe sembrare che la crittografia abbia le stesse garanzie della firma, con l'aggiunta della riservatezza dei dati.
+Tuttavia la crittografia non garantisce l'autenticità dei dati, ma solo la loro riservatezza.
+
+Il \emph{JWE} supporta principalmente due schemi: uno schema a chiave segreta e uno a chiave pubblica.
+Lo schema a chiave segreta funziona in modo che ogni parte che detiene la chiave segreta può crittografare e decrittografare i dati
+
+Lo schema a chiave pubblica, invece, funziona in maniera differente.
+In questo caso sono le parti che detengono la chiave pubblica a crittografare i dati, mentre la parte che detiene la chiave privata può decrittografarli.
+In pratica, in \emph{JWE} chi detiene la chiave pubblica può creare nuovi messaggi crittografati.
+Questo vuol dire che \emph{JWE} non fornisce le stesse garanzie di autenticità come la firma.
+
+Per questi motivi \emph{JWE} è spesso utilizzato in combinazione con \emph{\gls{JWS}}: un token crittografato funziona da container per un token firmato in modo da ottere i benefici di entrambi.
+
+\subsection{JSON Web Signature}
+Il \emph{JSON Web Signature (JWS)} stabilisce un singolo algoritmo di firma supportato da tutte le implementazioni: \emph{\hyperref[cap:hmac]{HMAC}} con \emph{SHA-256}, chiamato \emph{HS256}.
+Tuttavia, secondo il \emph{\gls{JWA}} standard, anche altri algoritmi sono consigliati per l'uso con \emph{JWT}.
+Tra questi \emph{\hyperref[cap:rsassa]{RSASSA PKCS1 v1.5}} con \emph{SHA-256 (RS256)} e \emph{ECDSA} con \emph{P-256} a curva ellittica e \emph{SHA-256 (ES256)}\footnote{Questi algoritmi vengono descritti nei paragrafi successivi}.
+
+
+\section{HMAC}
+\label{cap:hmac}
+
+\emph{Keyed-Hash Message Authentication Code (HMAC)} è un algoritmo di firma che combina un certo messaggio con una chiave segreta utilizzando una funzione \emph{hash} crittografica.
+Il risultato è un codice di autenticazione che può essere utilizzato per verificare un messaggio solo se le parti generatrice e verificatrice condividono la stessa chiave segreta.
+
+La robustezza della funzione \emph{hash} garantisce che il messaggio non possa essere modificato senza conoscere la chiave segreta.
+
+In sostanza, \emph{HMAC} permette di verificare l'integrità e l'autenticità di un messaggio attraverso chiavi segrete condivise.
+
+\noindent Sia:
+\begin{itemize}
+	\item $H$ la funzione \emph{hash} crittografica
+	\item $B$ la lunghezza del blocco di $H$
+	\item $K$ la chiave segreta
+	\item $K'$ la vera chiave utilizzata da $H$ e derivata da $K$
+	\item $ipad$ il byte \emph{0x36} ripetuto $B$ volte (chiamato anche padding interno)
+	\item $opad$ il byte \emph{0x5C} ripetuto $B$ volte (chiamato anche padding esterno)
+	\item $M$ il messaggio
+	\item $||$ l'operatore di concatenazione
+\end{itemize}
+
+\noindent L'algoritmo \emph{HMAC} è definito come:
+\begin{verbatim}
+
+HMAC(K, M) = H((K' xor opad) || H((K' xor ipad) || M))
+
+\end{verbatim}
+dove $K'$ è definito come segue:
+\begin{itemize}
+	\item Se $K$ è più corto di $B$, vengono aggiunti zeri a sinistra per raggiungere la lunghezza di $B$.
+	\item Se $K$ è più lungo di $B$, viene calcolato $H(K)$.
+	\item Se $K$ è esattamente di $B$ byte, $K'$ è uguale a $K$.
+\end{itemize}
+
+
+\section{RSA}
+Gli algoritmi a chiave pubblica si basano sulla generazione di due chiavi, una privata e una pubblica, per crittografare e decrittografare rispettivamente i dati.
+
+L'algoritmo \emph{RSA}, uno dei più noti algoritmi a chiave pubblica, si fonda sulla complessità del problema della fattorizzazione dei numeri interi composti.
+La sicurezza di \emph{RSA} deriva dal fatto che, mentre è relativamente facile moltiplicare due numeri primi per ottenere un numero composto, è estremamente difficile eseguire l'operazione inversa, ossia fattorizzare un numero composto per ottenere i due numeri primi originali.
+
+\noindent Questo problema può essere rappresentato come segue:
+
+$$(m^e)^d \equiv m \mod n$$
+
+\noindent In cui $m$ è il messaggio originale ed $e$, $d$ e $n$ sono scelti nel seguente modo:
+\begin{enumerate}
+	\item $p$ e $q$ sono due grandi primi generati casualmente.
+	      \begin{itemize}
+		      \item Un Random Number Generator (RNG) crittograficamente sicuro dovrebbe essere utilizzato per generare questi numeri.
+		      \item Non esistendo modo di generare randomicamente numeri primi, è necessario verificare che i numeri generati siano effettivamente primi.
+		      \item I numeri primi devono essere grandi e simili per ordine di grandezza.
+	      \end{itemize}
+	\item $n$ è il risultato del prodotto $p \cdot q$. Questo numero è il modulo e il suo numero di bit equivale alla lunghezza della chiave.
+	\item $\phi(n) = (p - 1) \cdot (q - 1)$ è il quoziente di Eulero ($phi(n)$).
+	\item $e$ è un numero intero scelto in modo che $1 < e < \phi(n)$ e $e$ sia coprimo con $\phi(n)$.
+	\item $d$ deve soddisfare la congruenza $d \equiv e^{-1} \mod \phi(n)$.
+	      \begin{itemize}
+		      \item $d$ è l'inverso moltiplicativo di $e$ modulo $\phi(n)$.
+		      \item L'equazione può essere riscritta come $e \cdot d \equiv 1 \mod \phi(n)$.
+	      \end{itemize}
+\end{enumerate}
+
+La chiave pubblica è composta dai valori di $n$ ed $e$, mentre la chiave privata è composta dai valori di $n$ ed $d$.
+$p$, $q$ e $\phi(n)$ sono valori che devono essere mantenuti segreti.
+
+Questa proprietà consente a chiunque abbia la chiave pubblica di crittografare un messaggio, ma solo chi possiede la chiave privata sarà in grado di decrittografarlo.
+
+\subsection{Firma e Verifica con RSA}
+\label{cap:rsassa}
+
+L'algoritmo \emph{RSA} non è solo utilizzato per la crittografia, ma anche per la firma digitale.
+La caratteristica principale dell'avere una coppia di chiavi pubblica e privata permette di utilizzare \emph{RSA} per creare firme digitali che permettono a chiunque di verificare l'origine e l'integrità del messaggio firmato utilizzando la chiave pubblica.
+Infatti, solamente chi è in possesso della chiave privata può creare la firma.
+Le chiavi pubbliche invece possono essere distribuite liberamente poichè non permettono di creare nuove firme, ma solo di validarle.
+
+\noindent Il processo di firma e verifica funziona come segue:
+\begin{enumerate}
+	\item Un \emph{digest}\footnote{Un \emph{digest} è un breve valore risultato da un blocco di dati più grande tramite una funzione \emph{hash}. Funziona come una "impronta digitale" dei dati, permettendo di verificare l'integrità e l'autenticità dei dati stessi senza bisogno di conoscere l'intero contenuto originale.} del messaggio viene calcolato da una funzione hash.
+	\item Il \emph{digest} viene poi elevato alla potenza di $d$ modulo $n$ (chiave privata).
+	\item Il risultato è aggiunto al messaggio come firma.
+\end{enumerate}
+Per verificare la firma invece:
+\begin{enumerate}
+	\item La firma viene elevata alla potenza di $e$ modulo $n$ (chiave pubblica). Questo restituisce il \emph{digest} originale.
+	\item Viene calcolato il \emph{digest} del messaggio ricevuto, utilizzando la stessa funzione \emph{hash} del passaggio di firma.
+	\item Se i due \emph{digest} sono uguali, la firma è valida.
+\end{enumerate}
+
+Questo processo è conosciuto come Signature Scheme with Appendix (SSA), infatti la firma è un "appendice" del messaggio originale in quanto è necessario nel processo di verifica della firma.
+Da questo deriva il nome dell'algoritmo \emph{RSASSA}.
+
+In una firma con \emph{RSA} la chiave privata viene utilizzata creare una firma che per verificarne l'autenticità.
+In contrasto, la chiave pubblica può essere utilizzata solo per verificare l'autenticità di un messaggio.
+Questo schema permette dunque la possibilità di distribuire in modo sicuro uno-a-molti messaggi firmati: le parti riceventi possono verificare l'autenticità del messaggio mantenendo una copia della chiave pubblica, ma non possono creare nuovi messaggi con essa.

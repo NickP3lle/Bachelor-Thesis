@@ -10,7 +10,7 @@
    2.2. Introduzione al progetto
    2.3. Obiettivi
 
-3. Autenticazione e autorizzazione
+3. Autenticazione JWT
    3.1. Utilizzo di token
    3.1.1. Token JWT
    3.1.2. Standard JWT
