@@ -103,7 +103,7 @@ Per questi motivi \emph{JWE} è spesso utilizzato in combinazione con \emph{\gls
 \subsection{JSON Web Signature}
 Il \emph{JSON Web Signature (JWS)} stabilisce un singolo algoritmo di firma supportato da tutte le implementazioni: \emph{\hyperref[cap:hmac]{HMAC}} con \emph{SHA-256}, chiamato \emph{HS256}.
 Tuttavia, secondo il \emph{\gls{JWA}} standard, anche altri algoritmi sono consigliati per l'uso con \emph{JWT}.
-Tra questi \emph{\hyperref[cap:rsassa]{RSASSA PKCS1 v1.5}} con \emph{SHA-256 (RS256)} e \emph{ECDSA} con \emph{P-256} a curva ellittica e \emph{SHA-256 (ES256)}\footnote{Questi algoritmi vengono descritti nei paragrafi successivi}.
+Tra questi \emph{\hyperref[cap:rsassa]{RSASSA PKCS1 v1.5}} con \emph{SHA-256 (RS256)} e \emph{\hyperref[cap:ecdsa]{ECDSA}} con \emph{P-256} a curva ellittica e \emph{SHA-256 (ES256)}\footnote{Questi algoritmi vengono descritti nei paragrafi successivi}.
 
 
 \section{HMAC}
@@ -156,7 +156,7 @@ $$(m^e)^d \equiv m \mod n$$
 \begin{enumerate}
 	\item $p$ e $q$ sono due grandi primi generati casualmente.
 	      \begin{itemize}
-		      \item Un Random Number Generator (RNG) crittograficamente sicuro dovrebbe essere utilizzato per generare questi numeri.
+		      \item Un \emph{\gls{RNG}} crittograficamente sicuro dovrebbe essere utilizzato per generare questi numeri.
 		      \item Non esistendo modo di generare randomicamente numeri primi, è necessario verificare che i numeri generati siano effettivamente primi.
 		      \item I numeri primi devono essere grandi e simili per ordine di grandezza.
 	      \end{itemize}
@@ -189,16 +189,132 @@ Le chiavi pubbliche invece possono essere distribuite liberamente poichè non pe
 	\item Il \emph{digest} viene poi elevato alla potenza di $d$ modulo $n$ (chiave privata).
 	\item Il risultato è aggiunto al messaggio come firma.
 \end{enumerate}
-Per verificare la firma invece:
+\noindent Per verificare la firma invece:
 \begin{enumerate}
 	\item La firma viene elevata alla potenza di $e$ modulo $n$ (chiave pubblica). Questo restituisce il \emph{digest} originale.
 	\item Viene calcolato il \emph{digest} del messaggio ricevuto, utilizzando la stessa funzione \emph{hash} del passaggio di firma.
 	\item Se i due \emph{digest} sono uguali, la firma è valida.
 \end{enumerate}
 
-Questo processo è conosciuto come Signature Scheme with Appendix (SSA), infatti la firma è un "appendice" del messaggio originale in quanto è necessario nel processo di verifica della firma.
+Questo processo è conosciuto come \emph{\gls{SSA}}, infatti la firma è un "appendice" del messaggio originale in quanto è necessario nel processo di verifica della firma.
 Da questo deriva il nome dell'algoritmo \emph{RSASSA}.
 
-In una firma con \emph{RSA} la chiave privata viene utilizzata creare una firma che per verificarne l'autenticità.
-In contrasto, la chiave pubblica può essere utilizzata solo per verificare l'autenticità di un messaggio.
 Questo schema permette dunque la possibilità di distribuire in modo sicuro uno-a-molti messaggi firmati: le parti riceventi possono verificare l'autenticità del messaggio mantenendo una copia della chiave pubblica, ma non possono creare nuovi messaggi con essa.
+
+
+\section{ECC}
+L'esistenza di algoritmi di fattorizzazione efficienti come il \emph{\gls{GNFS}} o il \emph{\gls{QS}} ha reso \emph{RSA} con chiavi brevi vulnerabile.
+Tuttavia, all'aumentare dei numeri da fattorizzare, non solo gli algoritmi di fattorizzazione diventano più efficienti, ma anche l'algoritmo \emph{RSA} diventa più lento, richiedendo chiavi che crescono ancora più velocemente.
+Questo diventa un problema insostenibile sul lungo periodo, in particolare per dispositivi con risorse limitate.
+Ciò può potenzialmente rendere \emph{RSA} insicuro e non più utilizzabile.
+
+L'\emph{ECC} consente di creare algoritmi crittografici più efficienti.
+Tra questi, l'\emph{\hyperref[cap:ecdh]{Elliptic Curve Diffie-Hellman (ECDH)}} per lo scambio di chiavi e l'\emph{Elliptic Curve Digital Signature Algorithm (ECDSA)} per la firma digitale sono i più comuni.
+Anche questo tipo di algoritmi genera una coppia di chiavi privata/pubblica, ma utilizza, invece della fattorizzazione di numeri semiprimi, il logaritmo discreto su curve ellittiche.
+
+\noindent Le curve ellittiche per la crittografia sono definite dalla seguente equazione di terzo grado:
+
+$$y^2 = x^3 + ax + b$$
+
+\noindent dove $a$ e $b$ sono parametri della curva.
+
+Gli algoritmi a curve ellittiche sono definiti su campi primi finiti, ovvero insiemi di numeri interi su cui sono definite due operazioni binarie: somma e moltiplicazione.
+Con campo primo finito si intende che il numero di elementi nel campo è un numero primo $p$, quindi una quantità finita. Tutti gli elementi e le operazioni sono definite modulo $p$.
+
+Rendendo il campo finito, gli algoritmi usati per le operazioni matematiche cambiano.
+In particolare, il logaritmo discreto viene usato al posto del logaritmo normale.
+
+Essendo il campo composto da un numero finito di elementi, si potrebbe pensare che il logaritmo (discreto) diventi un problema semplice, tuttavia, non esiste ad oggi un algoritmo efficiente per la risoluzione del logaritmo discreto su curve ellittiche.
+Questa proprietà rende il logaritmo discreto ideale per la crittografia e la firma digitale.
+
+Per rendere però l'algoritmo sicuro, è necessario che la curva, ovvero i parametri $a$ e $b$, sia scelta in modo corretto. In passato, infatti, si sono verificati casi in cui certi parametri hanno reso le curve deboli.
+
+L'aspetto interessante degli algoritmi a curva ellittica è che la lunghezza della chiave può essere ridotta di molto rispetto a \emph{RSA} per ottenere lo stesso livello di sicurezza.
+Per esempio, una chiave EC\footnote{Chiave generata da una curva ellittica} di 256 bit è considerata sicura quanto una chiave \emph{RSA} di 3072 bit.
+
+Ciò, oltre che a rendere più efficienti gli algoritmi, semplifica la trasmissione e la memorizzazione delle chiavi.
+Il motivo per cui la chiave EC può essere più corta risiede nell'inesistenza, ad oggi, di algoritmi che risolvono il logaritmo discreto più efficientemente dell'approccio \emph{naive} o \emph{brute-force}, diversamente da \emph{RSA} che è più vulnerabile a fattorizzazione efficiente.
+
+In un suo studio, il matematico Arjen K. Lenstra ha esposto il concetto di "Universal Security" calcolando l'energia necessaria per rompere determinti algoritmi crittografici e comparandola con la quantità di acqua che quell'energia sarebbe in grado di portare a ebollizione.
+Con questo metodo, Lenstra ha dimostrato che per rompere una chiave \emph{RSA} di 228 bit è richiesta meno energia di quella necessaria per portare a ebollizione un cucchiaino d'acqua.
+Al contrario, per rompere una chiave EC a 228 bit è necessaria una quantità di energia che porterebbe a ebollizione l'intera acqua presente sulla Terra.
+Per questo livello di sicurezza con \emph{RSA} è necessaria una chiave di almeno 2380 bit.
+
+\subsection{Usi di ECC}
+Nonostante la sua sicurezza e la sua efficienza, l'uso di \emph{ECC} è ancora limitato rispetto a \emph{RSA}.
+Tuttavia negli ultimi anni si è assistito ad un aumento dell'interesse per questa tecnologia e ad un incremento del suo utilizzo in varie applicazioni.
+Il governo degli Stati Uniti, ad esempio, ha adottato \emph{ECC} per la crittografia delle comunicazioni, il progetto Tor lo utilizza per aiutare a garantire l'anonimato degli utenti e il protocollo TLS lo utilizza per garantire la sicurezza delle comunicazioni su Internet tramite HTTPS.
+Anche i servizi di messaggistica di iMessage e Whatsapp utilizzano \emph{ECC} per garantire la sicurezza delle loro comunicazioni.
+\emph{ECC} è inoltre utilizzato in molte applicazioni di blockchain, come Bitcoin ed Ethereum, al fine di approvare le transazioni.
+
+\subsection{Elliptic Curve Digital Signature Algorithm (ECDSA)}
+\label{cap:ecdsa}
+
+L'\emph{Elliptic Curve Digital Signature Algorithm} è un algoritmo di firma digitale basato su curve ellittiche.
+Il funzionamento è simile a quello di \emph{RSA}, ma utilizza curve ellittiche al posto dei numeri interi.
+Immaginiamo che \emph{User A} voglia inviare un messaggio firmato a \emph{User B}.
+\emph{A} sceglie in modo randomico un numero $d_A$ nel range $[1, n-1]$, che rappresenta la chiave private e dove $n$ è l'ordine del punto base $G$ della curva ellittica ed è un numero primo.
+A questo punto, \emph{A} calcola il punto $Q_A = d_A \cdot G$ e la coordinata $x$ di $Q_A$. Il risultato è un punto della curva che rappresenta la chiave pubblica.
+La curva ellittica e i suoi parametri (inclusi $G$ e $n$) vengono prestabiliti in base a uno standard crittografico.
+
+\noindent Dunque, per firmare un messaggo \emph{User A} procede come segue:
+\begin{enumerate} % firma e verifica sono da controllare
+	\item Calcola il digest $H(m)$ del messaggio $m$ con una funzione hash crittografica.
+	\item $H(m)$ viene poi convertito in un numero intero intero $h$ ridotto modulo $n$.
+	\item Un numero $k$ viene scelto randomicamente nel range $[1, n-1]$.
+	\item Calcola il punto $k \cdot G$ e la sua coordinata $x$ viene ridotta modulo $n$, ottenendo $r$. Se $r = 0$, viene scelto un nuovo $k$.
+	\item Calcola $s = (h + rd_A)/k \mod n$. Se $s = 0$, viene scelto un nuovo $k$.
+	\item La coppia $(r, s)$ è la firma del messaggio.
+\end{enumerate} % firma e verifica sono da controllare
+
+È importante notare che $k$ deve essere scelto in modo randomico e non deve essere mai riutilizzato con la stessa chiave privata.
+L'utilizzo di $k$ più volte con la stessa chiave privata può portare alla compromissione della chiave privata.
+
+\noindent Per verificare la firma \emph{User B} procede come segue:
+\begin{enumerate} % firma e verifica sono da controllare
+	\item Verifica che $r$ e $s$ siano nel range $[1, n-1]$ e che $Q_A$ sia un punto sulla curva il cui prodotto con $n$ è l'elemento neutro.
+	\item Calcola il digest $H(m)$ del messaggio $m$ con una funzione hash crittografica.
+	\item $H(m)$ viene poi convertito in un numero intero intero $h$ ridotto modulo $n$.
+	\item Calcola $w = s^{-1} \mod n$.
+	\item Calcola $u_1 = hw \mod n$ e $u_2 = rw \mod n$.
+	\item Calcola il punto $u_1 \cdot G + u_2 \cdot Q_A$ e la sua coordinata $x$ viene ridotta modulo $n$, ottenendo $v$.
+	\item La firma è valida se $v = r$.
+\end{enumerate} % firma e verifica sono da controllare
+
+
+\subsection{Autenticazione in Diffie Hellman}
+
+Il protocollo \emph{Diffie-Hellman (D-H)} originale non prevedeva l'autenticazione delle parti coinvolte nella comunicazione, rendendolo vulnerabile a MITM e Impersonation Attack.
+
+Nell'Impersonation Attack, l'attaccante intercetta un messaggio di A indirizzato a B, contenente la chiave pubblica $Y_a$, e invia ad A la propria chiave pubblica $Y_{att}$ con l'User ID di B.
+In questo modo A genera la chiave segreta condivisa credendo di star comunicando con B.
+
+Nel Man-in-the-Middle Attack, un attaccante si interpone tra le due parti e stabilisce due connessioni separate, una con A e una con B, impersonando entrambe le parti.
+
+Si può notare come il protocollo è soggetto a questo tipo di attacchi in quanto non è presente nessun tipo di autenticazione tra le parti.
+Esistono generalmente tre metodi differenti per garantire l'autenticità delle parti in D-H:
+\begin{itemize}
+	\item \textbf{Firma Digitale}: Lo scambio di chiavi è autenticato da una firma, ovvero un hash ottenibile da entrambi gli utenti, ciascuno crittografato con la propria chiave privata. Questo hash viene generato da parametri importanti come l'User ID.
+	\item \textbf{Cifratura a chiave pubblica}: Alcuni parametri importanti vengono crittografati con la propria chiave privata.
+	\item \textbf{Chiave simmetrica}: Una chiave simmetrica condivisa attraverso altri mezzi viene utilizzata per autenticare la comunicazione.
+\end{itemize}
+
+\subsection{Diffie Hellman Key Exchange con Curve Ellittiche (ECDH)}
+\label{cap:ecdh}
+
+Il Diffie-Hellman Key Exchange può essere implementato anche con curve ellittiche.
+User A and B scelgono una curva ellittica $E(a,b)$ e un punto $G$ su di essa, che funge da generatore. Questi parametri vengono resi pubblici.
+A e B scelgono, a questo punto, due numeri casuali e segreti $X_a$ e $X_b$ e calcolano rispettivamente $Y_a = X_a \cdot G$ e $Y_b = X_b \cdot G$, dove $\cdot$ indica il prodotto scalare.
+A e B si scambiano i valori pubblici $Y_a$ e $Y_b$ e calcolano grazie ad essi la chiave segreta condivisa $K$.
+\begin{equation}
+	\begin{aligned}
+		&K = X_a \cdot Y_b\\
+		&= X_a \cdot (X_b \cdot G)\\
+		&= X_b \cdot (X_a \cdot G)\\
+		&= X_b \cdot Y_a = K
+	\end{aligned}
+\end{equation}
+
+Anche in questo caso, un utente malevolo che intercetta i valori pubblici $Y_a$ e $Y_b$ non può risalire ai valori privati $X_a$ e $X_b$ senza conoscere il logaritmo discreto su curve ellittiche e quindi non può ottenere la chiave segreta condivisa.
+
+Come per il D-H con numeri interi, anche ECDH non prevede l'autenticazione delle parti coinvolte nella comunicazione e quindi è vulnerabile a MITM Attack.
