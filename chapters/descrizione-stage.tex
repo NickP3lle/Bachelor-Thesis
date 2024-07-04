@@ -17,7 +17,7 @@ Quando il token scade, l'utente deve autenticarsi nuovamente per ottenere un nuo
 L'autenticazione è un processo fondamentale per la sicurezza di un'applicazione.
 Essa, infatti, permette di verificare che l'utente sia chi sostiene di essere, dando ad ogni utente un'identità univoca che protegge i dati dell'utente stesso negando l'accesso a soggetti non autorizzati.
 
-Esistono principalmente due metodi di autenticazione: l'autenticazione basata su \emph{\gls{web cookie}}\glsfirstoccur e l'autenticazione basata su token.
+Esistono principalmente due metodi di autenticazione: l'autenticazione basata su \emph{\gls{web cookie}} e l'autenticazione basata su token.
 
 \subsection{Autenticazione basata su web cookie}
 Un web cookie, o più semplicemente cookie, è un piccolo blocco di dati creato da un server web e inviato all'utente\footcite{site:cookie-wikipedia}.
@@ -52,12 +52,12 @@ Il principale è che sono supportati da tutti i browser e sono facili da impleme
 I cookie inoltre necessitano di poca memoria e possono essere utilizzati anche per i \emph{sottodomini} di un sito web.
 
 Tuttavia, l'autenticazione basata su cookie ha anche dei limiti.
-Infatti, essi sono vulnerabili ad attacchi di tipo \emph{Cross-Site Scripting (XSS)} e \emph{Cross-Site Request Forgery (CSRF)} e non sono adatti per le architetture senza stato (dall'inglese \emph{stateless}), come alcuni tipi di \emph{\gls{API}}\glsfirstoccur.
+Infatti, essi sono vulnerabili ad attacchi di tipo \emph{Cross-Site Scripting (XSS)} e \emph{Cross-Site Request Forgery (CSRF)} e non sono adatti per le architetture senza stato (dall'inglese \emph{stateless}), come alcuni tipi di \emph{\gls{API}}.
 Inoltre, i cookie non sono facilmente scalabili e non sono adatti per le applicazioni distribuite, in quanto dovrebbero essere memorizzati in un \emph{database} condiviso che potrebbe aumentare la complessità dell'applicazione.
 
 \subsection{Autenticazione basata su token}
 Un metodo di autenticazione alternativo all'utilizzo dei cookie è l'autenticazione basata su token.
-Questo metodo è diventato molto popolare negli ultimi anni grazie all'aumento delle applicazioni web single page, al maggiore utilizzo di \emph{\gls{API RESTful}}\glsfirstoccur e dalla diffusione di dispositivi \emph{\gls{IoT}}\glsfirstoccur.
+Questo metodo è diventato molto popolare negli ultimi anni grazie all'aumento delle applicazioni web single page, al maggiore utilizzo di \emph{\gls{API RESTful}} e dalla diffusione di dispositivi \emph{\gls{IoT}}.
 
 Un token è un oggetto simbolico rilasciato da un'autorità fidata\footcite{site:token-based-authentication-cloudflare}, ovvero il server, che permette all'utente di accedere a una risorsa protetta.
 Diversamente dai cookie, i token sono \emph{stateless}, dunque non è necessaria la memorizzazione di alcuna informazione sul server.
