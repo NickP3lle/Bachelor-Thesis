@@ -101,7 +101,7 @@ Questo vuol dire che \emph{JWE} non fornisce le stesse garanzie di autenticità 
 Per questi motivi \emph{JWE} è spesso utilizzato in combinazione con \emph{\gls{JWS}}: un token crittografato funziona da container per un token firmato in modo da ottere i benefici di entrambi.
 
 \subsection{JSON Web Signature}
-Il \emph{JSON Web Signature (JWS)} stabilisce un singolo algoritmo di firma supportato da tutte le implementazioni: \emph{\hyperref[cap:hmac]{HMAC}} con \emph{SHA-256}, chiamato \emph{HS256}.
+Il \emph{JSON Web Signature (JWS)} stabilisce un singolo algoritmo di firma supportato da tutte le implementazioni: \emph{\hyperref[cap:hmac]{HMAC}} con \emph{\gls{SHA-256}}, chiamato \emph{HS256}.
 Tuttavia, secondo il \emph{\gls{JWA}} standard, anche altri algoritmi sono consigliati per l'uso con \emph{JWT}.
 Tra questi \emph{\hyperref[cap:rsassa]{RSASSA PKCS1 v1.5}} con \emph{SHA-256 (RS256)} e \emph{\hyperref[cap:ecdsa]{ECDSA}} con \emph{P-256} a curva ellittica e \emph{SHA-256 (ES256)}\footnote{Questi algoritmi vengono descritti nei paragrafi successivi}.
 
@@ -140,6 +140,8 @@ dove $K'$ è definito come segue:
 	\item Se $K$ è più lungo di $B$, viene calcolato $H(K)$.
 	\item Se $K$ è esattamente di $B$ byte, $K'$ è uguale a $K$.
 \end{itemize}
+
+La funzione \emph{HS256} è un esempio di algoritmo \emph{HMAC} che utilizza la funzione di \emph{hash} \emph{SHA-256}.
 
 
 \section{RSA}
@@ -197,10 +199,11 @@ Le chiavi pubbliche invece possono essere distribuite liberamente poichè non pe
 \end{enumerate}
 
 Questo processo è conosciuto come \emph{\gls{SSA}}, infatti la firma è un "appendice" del messaggio originale in quanto è necessario nel processo di verifica della firma.
-Da questo deriva il nome dell'algoritmo \emph{RSASSA}.
-
 Questo schema permette dunque la possibilità di distribuire in modo sicuro uno-a-molti messaggi firmati: le parti riceventi possono verificare l'autenticità del messaggio mantenendo una copia della chiave pubblica, ma non possono creare nuovi messaggi con essa.
 
+\emph{RSASSA} è una famiglia di schemi di firme digitali basati su \emph{RSA} che utilizzano \emph{SSA}.
+Tra questi algoritmi possiamo trovare \emph{RSASSA-PKCS1-v1\_5} che utilizza un tipo di padding specifico descritto nello standard \emph{PKCS\#1 v1.5}.
+L'utilizzo della funzione di \emph{hash SHA-256} permette di rendere la firma di \emph{RS256}\footnote{RSASSA-PKCS1-v1\_5 con SHA-256} crittograficamente sicura.
 
 \section{ECC}
 L'esistenza di algoritmi di fattorizzazione efficienti come il \emph{\gls{GNFS}} o il \emph{\gls{QS}} ha reso \emph{RSA} con chiavi brevi vulnerabile.
