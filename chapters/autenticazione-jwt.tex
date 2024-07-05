@@ -361,7 +361,14 @@ Nonostante l'efficacia dello scambiare chiavi segrete, il protocollo \emph{Diffi
 Nell'\emph{Impersonation Attack}, l'attaccante intercetta un messaggio di \emph{A} indirizzato a \emph{B}, contenente la chiave pubblica $Y_a$, e invia ad \emph{A} la propria chiave pubblica $Y_{att}$ con l'\emph{User ID} di \emph{B}.
 In questo modo \emph{A} genera la chiave segreta condivisa credendo di star comunicando con \emph{B}.
 
-Nel \emph{Man-in-the-Middle Attack}, un attaccante si interpone tra le due parti e stabilisce due connessioni separate, una con \emph{A} e una con \emph{B}, impersonando entrambe le parti.
+Nel \emph{Man-in-the-Middle Attack}, un attaccante si interpone tra le due parti e stabilisce due connessioni separate, una con \emph{A} e una con \emph{B}, impersonando entrambe le parti. Il \emph{MITM} può essere effettuato anche tra un utente e un server. Questo processo viene illustrato in figura \ref{fig:mitm}.
+
+\begin{figure}[!ht] 
+    \centering 
+    \includegraphics[width=0.8\columnwidth]{autenticazione/mitm} 
+    \caption{Man in the Middle Attack \cite{site:mitm-image}}
+	\label{fig:mitm}
+\end{figure}
 
 Si può notare come il protocollo è soggetto a questo tipo di attacchi in quanto non è presente nessun tipo di autenticazione tra le parti.
 
@@ -391,3 +398,42 @@ Il \emph{Diffie-Hellman Key Exchange} può essere implementato anche con curve e
 Anche in questo caso, un utente malevolo che intercetta i valori pubblici $Y_a$ e $Y_b$ non può risalire ai valori privati $X_a$ e $X_b$ senza conoscere il logaritmo discreto su curve ellittiche e quindi non può ottenere la chiave segreta condivisa.
 
 Come per il \emph{D-H} tradizionale con numeri interi, anche \emph{ECDH} non prevede l'autenticazione delle parti coinvolte nella comunicazione e quindi è vulnerabile a \emph{MITM Attack}.
+
+
+\section{Considerazioni sulla Sicurezza di JWT}
+Come già detto, La firma digitale garantisce l'integrità dei dati contenuti nei token JWT, ma per assicurare una completa sicurezza è fondamentale considerare alcuni aspetti cruciali.
+Innanzitutto, è necessario archiviare correttamente le chiavi, garantendo che siano al sicuro e non siano accessibili a terzi.
+Ciò è ugualmente importante nel caso di token crittografati.
+
+Un altro aspetto importante è la trasmissione di informazioni sensibili.
+Per evitare la divulgazione di questi dati durante la trasmissione dei token è estremamente consigliato utilizzare protocolli sicuri come \emph{HTTPS}.
+Inoltre, la cifratura dei token rappresenta un ulteriore livello di protezione, particolarmente utile quando i token contengono dati sensibili.
+
+Nel caso in cui siano necessarie sia la firma che la crittografia, è consigliabile firmare il token prima di crittografarlo.
+Questo approccio previene attacchi come il \emph{Signature Stripping Attack}, in cui l'attaccante tenta di rimuovere la firma dal token per ottenere accesso ai dati.
+
+Oltre a ciò, è essenziale implementare una corretta gestione dei token. Questo include la limitazione della durata dei token tramite scadenze brevi e l'adozione di un sistema di revoca per invalidare i token compromessi o non più validi. È anche importante applicare politiche di rotazione delle chiavi, limitando il periodo di validità delle chiavi e sostituendole regolarmente.
+
+\subsection{Signature Stripping Attack}
+Un metodo comune per aggirare la verifica della firma consiste nel rimuovere la firma dal token.
+Essendo le tre parti del token codificate separatamente, un attaccante può facilmente rimuovere la firma e modificare l'\emph{header} per far sembrare il token valido senza una firma.
+
+Per prevenire efficacemente questo attacco è essenziale assicurarsi che il server accetti solo token firmati. Questo controllo deve essere rigoroso per garantire che solo token autentici vengano utilizzati all'interno del sistema.
+
+\subsection{Cross-Site Request Forgery Attack}
+Attacchi \emph{Cross-Site Request Forgery Attack (CSRF)} sfruttano la fiducia che un sito ha in un utente autenticato per inviare richieste non autorizzate, ingannando il browser dell'utente a inviare richieste a un sito diverso da quello visitato attraverso elementi come immagini o script che contengono l'\emph{URL} del sito target.
+Se il sito target utilizza cookie di sessione, queste richieste conterranno automaticamente le credenziali dell'utente.
+
+\emph{JWT} token con breve validità di tempo possono mitigare questo attacco, in modo da poter ridurre il tempo in cui un token rubato può essere sfruttato.
+Un'altra soluzione efficace è l'use di speciali campi che vengono aggiunti alle richieste solo quando provengono da un sito autorizzato.
+Inoltre, poiché l'attacco CSRF si basa sui cookie, evitare di memorizzare i token JWT nei cookie può prevenire l'attacco, utilizzando invece altre tecniche di memorizzazione.
+
+\subsection{Cross-Site Scripting Attack}
+Gli attacchi \emph{Cross-Site Scripting Attack (XSS)} consentono a un attaccante di eseguire script malevoli nel browser di un utente.
+Questi script possono essere utilizzati per rubare i token accedendo ai cookie e al \emph{localStorage}.
+
+Molti attacchi \emph{XSS} sono causati da una mancata validazione e sanificazione dei dati passati al server.
+Infatti, se il \emph{backend}\footnote{Il \emph{backend} è la parte di un'applicazione che si occupa dell'elaborazione dei dati e della logica dell'applicazione.} non sanifica i dati in ingresso, un attaccante può inserire dati in modo che vengano interpretati come script.
+
+Per risolvere questo problema è sempre necessario sanificare i dati in ingresso.
+Inoltre, se i token vengono salvati nei cookie, è possibile utilizzare la flag \emph{HttpOnly} per impedirne l'accesso da parte di script eseguiti nel browser.

@@ -61,7 +61,9 @@ Questo metodo è diventato molto popolare negli ultimi anni grazie all'aumento d
 
 Un token è un oggetto simbolico rilasciato da un'autorità fidata\footcite{site:token-based-authentication-cloudflare}, ovvero il server, che permette all'utente di accedere a una risorsa protetta.
 Diversamente dai cookie, i token sono \emph{stateless}, dunque non è necessaria la memorizzazione di alcuna informazione sul server.
-Ciò è possibile perché ogni token contiene tutte le informazioni necessarie per la verifica dell'identità dell'utente e per l'accesso alla risorsa protetta. \\
+Ciò è possibile perché ogni token contiene tutte le informazioni necessarie per la verifica dell'identità dell'utente e per l'accesso alla risorsa protetta.
+
+Generalmente i token vengono salvati nel \emph{localStorage}\footnote{Il local storage di un browser è una memoria interna che consente di salvare dati localmente sul dispositivo dell'utente.} del browser ma possono essere memorizzati anche all'interno di un cookie.\\
 
 \noindent Analogamente ai cookie, l'autenticazione basata su token viene effettuata nel seguente modo, come illustrato in figura \ref{fig:auth-token-based}:
 \begin{enumerate}
