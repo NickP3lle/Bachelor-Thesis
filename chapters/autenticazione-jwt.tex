@@ -85,7 +85,7 @@ I \emph{Refresh Token} hanno una vita più lunga degli \emph{Access Token} e int
 
 \begin{figure}[!ht] 
     \centering 
-    \includegraphics[width=0.7\columnwidth]{autenticazione/rt-and-at} 
+    \includegraphics[width=0.8\columnwidth]{autenticazione/rt-and-at} 
     \caption{Flusso dei token JWT. RT = Refresh Token; AT = Access Token; AS = Authorization Server (Server di Autorizzazione); RS = Resourse Server (Server di Risorsa); SPA = Single Page Application (Applicazione Web). Fonte: \cite{site:jwt-flow}}
 	\label{fig:jwt-flow}
 \end{figure}
@@ -294,7 +294,7 @@ Il funzionamento è simile a quello di \emph{RSA}, ma utilizza curve ellittiche 
 
 Immaginiamo che \emph{Utente A} voglia inviare un messaggio firmato a \emph{Utente B}.
 \emph{A} sceglie in modo randomico un numero $d_A$ nel range $[1, n-1]$, che rappresenta la chiave private e dove $n$ è l'ordine del punto base $G$ della curva ellittica ed è un numero primo.
-A questo punto, \emph{A} calcola il punto $Q_A = d_A \cdot G$\footnote{Nel contesto delle curve ellittiche indicheremo con il $\cdot$ del prodotto scalare la "moltiplicazione scalare delle curve ellittiche" (dall'inglese elliptic curve point multiplication). Questa è un'operazione che consiste nel sommare ripetutamente un punto $P$ sulla curva a se stesso un certo numero di volte $k$. La nomenclatura risulterà $P \cdot k$. \cite{site:ec-point-multiplication}} e la coordinata $x$ di $Q_A$. Il risultato è un punto della curva che rappresenta la chiave pubblica.
+A questo punto, \emph{A} calcola il punto $Q_A = d_A \cdot G$\footnote{Nel contesto delle curve ellittiche indicheremo con il $\cdot$ del prodotto scalare la "moltiplicazione scalare delle curve ellittiche" (dall'inglese elliptic curve point multiplication). Questa è un'operazione che consiste nel sommare ripetutamente un punto $P$ sulla curva a se stesso un certo numero di volte $k$. La nomenclatura risulterà $P \cdot k$. (\cite{site:ec-point-multiplication})} e la coordinata $x$ di $Q_A$. Il risultato è un punto della curva che rappresenta la chiave pubblica.
 La curva ellittica e i suoi parametri (inclusi $G$ e $n$) vengono prestabiliti in base a uno standard crittografico.
 
 \noindent Dunque, per firmare un messaggo \emph{Utente A} procede come segue:
@@ -350,9 +350,16 @@ Infatti:
 	\end{aligned}
 \end{equation}
 
-In questo modo i due utenti si sono scambiati una chiave segreta senza che nessuno dei due abbia mai inviato la propria chiave privata.
+In questo modo i due utenti si sono scambiati una chiave segreta senza che nessuno dei due abbia mai inviato la propria chiave privata (figura \ref{fig:diffie-hellman}).
 Inoltre, un attaccante che intercetta i valori pubblici $Y_a$ e $Y_b$ non può risalire ai valori privati $X_a$ e $X_b$ senza conoscere il logaritmo discreto su campi finiti.
 La sicurezza del protocollo si basa sulla relativa facilità di calcolare esponenziali modulari e la difficoltà di calcolare logaritmi discreti. In particolare, per primi grandi, quest'ultima operazione è considerata infattibile.
+
+\begin{figure}[!ht] 
+    \centering 
+    \includegraphics[width=1\columnwidth]{autenticazione/diffie-hellman} 
+    \caption{Diffie-Hellman Key Exchange (\cite{site:diffie-hellman-image})}
+	\label{fig:diffie-hellman}
+\end{figure}
 
 
 \subsection{Autenticazione in Diffie Hellman}
@@ -366,7 +373,7 @@ Nel \emph{Man-in-the-Middle Attack}, un attaccante si interpone tra le due parti
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.8\columnwidth]{autenticazione/mitm} 
-    \caption{Man in the Middle Attack \cite{site:mitm-image}}
+    \caption{Man in the Middle Attack (\cite{site:mitm-image})}
 	\label{fig:mitm}
 \end{figure}
 
@@ -421,19 +428,34 @@ Essendo le tre parti del token codificate separatamente, un attaccante può faci
 Per prevenire efficacemente questo attacco è essenziale assicurarsi che il server accetti solo token firmati. Questo controllo deve essere rigoroso per garantire che solo token autentici vengano utilizzati all'interno del sistema.
 
 \subsection{Cross-Site Request Forgery Attack}
-Attacchi \emph{Cross-Site Request Forgery Attack (CSRF)} sfruttano la fiducia che un sito ha in un utente autenticato per inviare richieste non autorizzate, ingannando il browser dell'utente a inviare richieste a un sito diverso da quello visitato attraverso elementi come immagini o script che contengono l'\emph{URL} del sito target.
+Attacchi \emph{Cross-Site Request Forgery Attack (CSRF)} sfruttano la fiducia che un sito ha in un utente autenticato per inviare richieste non autorizzate, ingannando il browser dell'utente a inviare richieste a un sito diverso da quello visitato attraverso elementi come immagini o script che contengono l'\emph{URL} del sito target (figura \ref{fig:csrf-attack}).
 Se il sito target utilizza cookie di sessione, queste richieste conterranno automaticamente le credenziali dell'utente.
 
 \emph{JWT} token con breve validità di tempo possono mitigare questo attacco, in modo da poter ridurre il tempo in cui un token rubato può essere sfruttato.
 Un'altra soluzione efficace è l'use di speciali campi che vengono aggiunti alle richieste solo quando provengono da un sito autorizzato.
 Inoltre, poiché l'attacco CSRF si basa sui cookie, evitare di memorizzare i token JWT nei cookie può prevenire l'attacco, utilizzando invece altre tecniche di memorizzazione.
 
+\begin{figure}[!ht] 
+    \centering 
+    \includegraphics[width=1\columnwidth]{autenticazione/csrf-attack} 
+    \caption{CSFR Attack (\cite{site:csrf-image})}
+	\label{fig:csrf-attack}
+\end{figure}
+
 \subsection{Cross-Site Scripting Attack}
 Gli attacchi \emph{Cross-Site Scripting Attack (XSS)} consentono a un attaccante di eseguire script malevoli nel browser di un utente.
 Questi script possono essere utilizzati per rubare i token accedendo ai cookie e al \emph{localStorage}.
 
 Molti attacchi \emph{XSS} sono causati da una mancata validazione e sanificazione dei dati passati al server.
-Infatti, se il \emph{backend}\footnote{Il \emph{backend} è la parte di un'applicazione che si occupa dell'elaborazione dei dati e della logica dell'applicazione.} non sanifica i dati in ingresso, un attaccante può inserire dati in modo che vengano interpretati come script.
+Infatti, se il \emph{backend}\footnote{Il \emph{backend} è la parte di un'applicazione che si occupa dell'elaborazione dei dati e della logica dell'applicazione.} non sanifica i dati in ingresso, un attaccante può inserire dati in modo che vengano interpretati come script \ref{fig:xss-attack}.
 
 Per risolvere questo problema è sempre necessario sanificare i dati in ingresso.
 Inoltre, se i token vengono salvati nei cookie, è possibile utilizzare la flag \emph{HttpOnly} per impedirne l'accesso da parte di script eseguiti nel browser.
+
+
+\begin{figure}[!ht] 
+    \centering 
+    \includegraphics[width=1\columnwidth]{autenticazione/xss-attack} 
+    \caption{CSFR Attack (\cite{site:xss-image})}
+	\label{fig:xss-attack}
+\end{figure}
