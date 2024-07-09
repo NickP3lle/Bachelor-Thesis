@@ -198,7 +198,7 @@ Questa proprietà consente a chiunque abbia la chiave pubblica di crittografare 
 L'algoritmo \emph{RSA} non è solo utilizzato per la crittografia, ma anche per la firma digitale.
 La caratteristica principale dell'avere una coppia di chiavi pubblica e privata permette di utilizzare \emph{RSA} per creare firme digitali che permettono a chiunque di verificare l'origine e l'integrità del messaggio firmato utilizzando la chiave pubblica.
 Infatti, solamente chi è in possesso della chiave privata può creare la firma.
-Le chiavi pubbliche invece possono essere distribuite liberamente poichè non permettono di creare nuove firme, ma solo di validarle.
+Le chiavi pubbliche invece possono essere distribuite liberamente poiché non permettono di creare nuove firme, ma solo di validarle.
 
 \noindent Il processo di firma e verifica funziona come segue:
 \begin{enumerate}
@@ -228,7 +228,7 @@ Questo compromesso tra sicurezza e performance diventa insostenibile sul lungo p
 Ciò può potenzialmente rendere \emph{RSA} insicuro e non più utilizzabile.
 
 L'\emph{ECC} consente di creare algoritmi crittografici più efficienti.
-Tra questi, l'\emph{\hyperref[sec:ecdh]{Elliptic Curve Diffie-Hellman (ECDH)}} per lo scambio di chiavi e l'\emph{Elliptic Curve Digital Signature Algorithm (ECDSA)} per la firma digitale sono i più comuni.
+Tra questi, l'\emph{\hyperref[sec:ecdh]{Elliptic Curve Diffie-Hellman (ECDH)}} per lo scambio di chiavi e l'\emph{\hyperref[sec:ecdsa]{Elliptic Curve Digital Signature Algorithm (ECDSA)}} per la firma digitale sono i più comuni.
 Anche questo tipo di algoritmi genera una coppia di chiavi privata/pubblica, ma utilizza, invece della fattorizzazione di numeri semiprimi, il logaritmo discreto su curve ellittiche.
 
 \noindent Le curve ellittiche per la crittografia sono definite dalla seguente equazione di terzo grado:
