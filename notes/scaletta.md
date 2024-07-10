@@ -38,6 +38,3 @@
 
 access token -- a string denoting a
 specific scope, lifetime, and other access attributes (https://www.rfc-editor.org/rfc/rfc6749)
-
-sezione JSON Web Signature: mettere link ai paragrafi
-sezione ECC: mettere i link ai paragrafi
