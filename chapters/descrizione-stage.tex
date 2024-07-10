@@ -1,13 +1,14 @@
 \chapter{Inquadramento dello stage}
 \label{cap:inquadramento-stage}
 
-\intro{Lo stage, come anche questo documento, si divide in due parti. La prima parte si concentra sullo studio dei \emph{JWT}, metodi di firma e metodi di crittografia. La seconda parte riguarda invece l'implementazione di un \emph{ChatBot} per la piattaforma di messaggistica Microsoft Teams, utilizzando \emph{JWT} firmati e crittografati}\\
+% \intro{Lo stage, come anche questo documento, si divide in due parti. La prima parte si concentra sullo studio dei \emph{JWT}, metodi di firma e metodi di crittografia. La seconda parte riguarda invece l'implementazione di un \emph{ChatBot} per la piattaforma di messaggistica Microsoft Teams, utilizzando \emph{JWT} firmati e crittografati}\\
+Lo stage, come anche questo documento, si divide in due parti. La prima parte si concentra sullo studio dei \emph{JWT}, metodi di firma e metodi di crittografia. La seconda parte riguarda invece l'implementazione di un \emph{ChatBot} per la piattaforma di messaggistica Microsoft Teams, utilizzando \emph{JWT} firmati e crittografati.
 
 \section{Introduzione alla ricerca}
 Il processo dell'autenticazione è l'atto di verificare le credenziali dell'utente in termini di correttezza o tempo\footcite{site:token-cookie-auth}.
 
 Per correttezza si intende che le credenziali siano valide e che l'utente sia chi dice di essere.
-Al momento dell'accesso, un token di autenticazione\footnote{In questo contesto, per token di autenticazione si intende una qualsiasi forma di credeziale di autentiazione.} viene assegnato all'utente.
+Al momento dell'accesso, un token di autenticazione\footnote{In questo contesto, per token di autenticazione si intende una qualsiasi forma di credenziale di autenticazione.} viene assegnato all'utente.
 Questo token viene utilizzato per verificare l'identità dell'utente in ogni richiesta successiva.
 
 Per tempo, invece, si intende che l'utente abbia accesso al sistema per un periodo di tempo limitato.
@@ -52,7 +53,7 @@ Il principale è che sono supportati da tutti i browser e sono facili da impleme
 I cookie inoltre necessitano di poca memoria e possono essere utilizzati anche per i \emph{sottodomini} di un sito web.
 
 Tuttavia, l'autenticazione basata su cookie ha anche dei limiti.
-Infatti, essi sono vulnerabili ad attacchi di tipo \emph{Cross-Site Scripting (XSS)} e \emph{Cross-Site Request Forgery (CSRF)} e non sono adatti per le architetture senza stato (dall'inglese \emph{stateless}), come alcuni tipi di \emph{\gls{API}}.
+Infatti, essi sono vulnerabili ad attacchi di tipo \emph{\hyperref[sec:xss]{Cross-Site Scripting (XSS)}} e \emph{\hyperref[sec:csrf]{Cross-Site Request Forgery (CSRF)}} e non sono adatti per le architetture senza stato (dall'inglese \emph{stateless}), come alcuni tipi di \emph{\gls{API}}.
 Inoltre, i cookie non sono facilmente scalabili e non sono adatti per le applicazioni distribuite, in quanto dovrebbero essere memorizzati in un \emph{database} condiviso che potrebbe aumentare la complessità dell'applicazione.
 
 \subsection{Autenticazione basata su token}
@@ -135,7 +136,7 @@ Prima dell'inizio dello stage Prorob S.r.l ha definito un piano di lavoro con gl
 
 Tuttavia, durante le prime settimane di stage, questi obiettivi non erano ancora stati definiti chiaramente e sono stati rivisti in base alle esigenze emerse.
 Infatti, questo ha portato alla rimozione di un obiettivo e alla definizione di uno nuovo.
-È stata quindi rimossa l'implementazione della tecnologia generatrice di token \emph{API} firmati e sostituita dall'implementazione di un \emph{ChatBot} per la piattaforma di Microsoft Teams utilizzando i \emph{JWT} e algorithmi di firma e crittografia. \\
+È stata quindi rimossa l'implementazione della tecnologia generatrice di token \emph{API} firmati e sostituita dall'implementazione di un \emph{ChatBot} per la piattaforma di Microsoft Teams utilizzando i \emph{JWT} e algoritmi di firma e crittografia. \\
 
 \noindent Gli obiettivi finali, dunque, sono diventati:
 \begin{itemize}
