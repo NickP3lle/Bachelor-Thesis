@@ -60,7 +60,7 @@ Inoltre, il contenuto delle notifiche viene crittografato con un \emph{certifica
 
 \subsection{Creazione dei certificati}
 
-\noindent La creazione dei \emph{certificati} avviene tramite il seguente codice:
+\noindent La creazione dei \emph{certificati} avviene tramite il codice mostrato nel listing \ref{lst:rsa-code}.
 
 \definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
 
@@ -82,7 +82,7 @@ Inoltre, il contenuto delle notifiche viene crittografato con un \emph{certifica
     columns=fullflexible,
 }
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Codice per la creazione di certificati tramite RSA, label=lst:rsa-code]
 using RSA rsa = RSA.Create(2048);
 
 CertificateRequest request =
@@ -130,9 +130,9 @@ Ogni notifica ricevuta deve essere validata seguendo certi passaggi che garantis
 	\item Infine, è necessario verificare che il token sia stato rilasciato per la propria applicazione verificando che il campo \emph{audience} del token sia uguale all'\emph{AppId} dell'applicazione.
 \end{enumerate}
 
-\noindent La libreria \emph{Microsoft.IdentityModel.Tokens} fornisce un aiuto per la validazione dei token.
+\noindent La libreria \emph{Microsoft.IdentityModel.Tokens} ha fornito un aiuto per la validazione dei token, illustrata nel listing \ref{lst:jwt-verification-code}.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Codice per la verifica della firma nei token JWT, label=lst:jwt-verification-code]
 private static async Task<bool> ValidateJwtToken(string token, IEnumerable<string> appIds)
 {
 	ConfigurationManager<OpenIdConnectConfiguration> configurationManager =
@@ -194,8 +194,9 @@ Questo processo permette di velocizzare la cifratura e la decifratura del conten
 \end{enumerate}
 
 \noindent Le funzioni sviluppate per eseguire queste operazioni sono state tre. La prima si occupa di decrittografare la chiave simmetrica con \emph{RSA}, la seconda di verificare la firma e la terza di decrittografare il contenuto con \emph{AES}.
+Queste funzioni sono illustrate nel listing \ref{lst:decryption-code}.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Funzioni per la decifratura delle notifiche, label=lst:decryption-code]
 // Decrypt the simmetric key with RSA
 private static byte[] DecryptDataRsa(string privateKey, string encryptedData)
 {
@@ -272,9 +273,9 @@ Quando l'\emph{API} genera una risposta, questa viene riinviata al \emph{WebServ
 
 Essendo l'ID della chat contenuto nella notifica, il \emph{Bot} è in grado di inviare la risposta alla conversazione corretta, con la possibilità di inviare, oltre al testo, anche immagini.
 
-\noindent La funzione chiamata è \emph{SendChatMessage}.
+\noindent La funzione chiamata è \emph{SendChatMessage} ed è illustrata nel listing \ref{lst:send-message-code}.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Funzione per l'invio dei messaggi, label=lst:send-message-code]
 public async Task<ChatMessage?> SendChatMessage(
 	string chatId,
 	string message,
