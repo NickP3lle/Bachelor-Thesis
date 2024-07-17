@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-07-09T20:12:34.160Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="zibjZSbxbQ4H_XF8gTiq" version="21.2.8" type="device">
+<mxfile host="Electron" modified="2024-07-12T14:21:22.346Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="pDrhYk4vUR5XzppuV28M" version="21.2.8" type="device">
   <diagram name="Page-1" id="A_R1ksriTNdyYSGnAM3n">
-    <mxGraphModel dx="570" dy="429" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="974" dy="594" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -8,24 +8,24 @@
           <mxGeometry x="240" y="80" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="1vNkuXaYnxZmw4keYtQA-2" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Server&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="520" y="80" width="120" height="60" as="geometry" />
+          <mxGeometry x="420" y="80" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="1vNkuXaYnxZmw4keYtQA-3" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" target="1vNkuXaYnxZmw4keYtQA-1" edge="1" source="MjYhxyYuJQHVnaJABY_H-8">
+        <mxCell id="1vNkuXaYnxZmw4keYtQA-3" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" target="1vNkuXaYnxZmw4keYtQA-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="300" y="420" as="sourcePoint" />
+            <mxPoint x="300" y="380" as="sourcePoint" />
             <mxPoint x="540" y="290" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1vNkuXaYnxZmw4keYtQA-4" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" target="1vNkuXaYnxZmw4keYtQA-2" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="580" y="420" as="sourcePoint" />
-            <mxPoint x="590" y="160" as="targetPoint" />
+            <mxPoint x="480" y="420" as="sourcePoint" />
+            <mxPoint x="490" y="160" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1vNkuXaYnxZmw4keYtQA-5" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="300" y="180" as="sourcePoint" />
-            <mxPoint x="580" y="180" as="targetPoint" />
+            <mxPoint x="480" y="180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1vNkuXaYnxZmw4keYtQA-6" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;1. Autenticazione&lt;br&gt;{username, password}&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="1vNkuXaYnxZmw4keYtQA-5" connectable="0" vertex="1">
@@ -35,26 +35,26 @@
         </mxCell>
         <mxCell id="1vNkuXaYnxZmw4keYtQA-11" value="" style="curved=1;endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="590" y="180" as="sourcePoint" />
-            <mxPoint x="590" y="220" as="targetPoint" />
+            <mxPoint x="490" y="180" as="sourcePoint" />
+            <mxPoint x="490" y="220" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="610" y="180" />
-              <mxPoint x="610" y="220" />
+              <mxPoint x="510" y="180" />
+              <mxPoint x="510" y="220" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="1vNkuXaYnxZmw4keYtQA-12" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;2. Creazione&amp;nbsp;&lt;br&gt;del&lt;br&gt;token&lt;br&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1vNkuXaYnxZmw4keYtQA-11" vertex="1" connectable="0">
+        <mxCell id="1vNkuXaYnxZmw4keYtQA-12" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;2. Creazione&amp;nbsp;&lt;br&gt;della&lt;br&gt;sessione&lt;br&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1vNkuXaYnxZmw4keYtQA-11" vertex="1" connectable="0">
           <mxGeometry x="-0.2194" y="-2" relative="1" as="geometry">
             <mxPoint x="42" y="13" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1vNkuXaYnxZmw4keYtQA-14" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="580" y="220" as="sourcePoint" />
+            <mxPoint x="480" y="220" as="sourcePoint" />
             <mxPoint x="300" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="1vNkuXaYnxZmw4keYtQA-15" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;3. Token codificato&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="1vNkuXaYnxZmw4keYtQA-14" connectable="0" vertex="1">
+        <mxCell id="1vNkuXaYnxZmw4keYtQA-15" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;3.&amp;nbsp;&lt;/font&gt;Set-Cookie: session = 123&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="1vNkuXaYnxZmw4keYtQA-14" connectable="0" vertex="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint y="-10" as="offset" />
           </mxGeometry>
@@ -62,17 +62,17 @@
         <mxCell id="1vNkuXaYnxZmw4keYtQA-16" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="300" y="280" as="sourcePoint" />
-            <mxPoint x="580" y="280" as="targetPoint" />
+            <mxPoint x="480" y="280" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="1vNkuXaYnxZmw4keYtQA-17" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;4. Richiesta autenticata&lt;br&gt;&lt;p style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal; text-align: start;&quot; class=&quot;p1&quot;&gt;Authorization: Bearer token&lt;/p&gt;&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="1vNkuXaYnxZmw4keYtQA-16" connectable="0" vertex="1">
+        <mxCell id="1vNkuXaYnxZmw4keYtQA-17" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;4.&amp;nbsp;Richiesta autenticata&lt;p style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal; text-align: start;&quot; class=&quot;p1&quot;&gt;Cookie: session = 123&lt;/p&gt;&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" parent="1vNkuXaYnxZmw4keYtQA-16" connectable="0" vertex="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint y="-17" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="1vNkuXaYnxZmw4keYtQA-18" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="580" y="320" as="sourcePoint" />
+            <mxPoint x="480" y="320" as="sourcePoint" />
             <mxPoint x="300" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -83,15 +83,15 @@
         </mxCell>
         <mxCell id="1vNkuXaYnxZmw4keYtQA-20" value="" style="curved=1;endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="590" y="280" as="sourcePoint" />
-            <mxPoint x="590" y="320" as="targetPoint" />
+            <mxPoint x="490" y="280" as="sourcePoint" />
+            <mxPoint x="490" y="320" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="610" y="280" />
-              <mxPoint x="610" y="320" />
+              <mxPoint x="510" y="280" />
+              <mxPoint x="510" y="320" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="1vNkuXaYnxZmw4keYtQA-21" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;5. Validazione&lt;br&gt;del token&lt;br&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1vNkuXaYnxZmw4keYtQA-20" vertex="1" connectable="0">
+        <mxCell id="1vNkuXaYnxZmw4keYtQA-21" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;5.&amp;nbsp;Ricerca&lt;br&gt;e verifica&lt;p style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal;&quot; class=&quot;p1&quot;&gt;della&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal;&quot; class=&quot;p1&quot;&gt;sessione&lt;/p&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1vNkuXaYnxZmw4keYtQA-20" vertex="1" connectable="0">
           <mxGeometry x="-0.2194" y="-2" relative="1" as="geometry">
             <mxPoint x="41" y="9" as="offset" />
           </mxGeometry>
@@ -111,7 +111,7 @@
             <mxPoint x="-12" y="-41" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MjYhxyYuJQHVnaJABY_H-3" value="" style="curved=1;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+        <mxCell id="MjYhxyYuJQHVnaJABY_H-3" value="" style="curved=1;endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="290" y="350" as="sourcePoint" />
             <mxPoint x="290" y="180" as="targetPoint" />
@@ -121,22 +121,167 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="MjYhxyYuJQHVnaJABY_H-4" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;6. Scadenza&lt;br&gt;del token&lt;br&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="MjYhxyYuJQHVnaJABY_H-3">
+        <mxCell id="MjYhxyYuJQHVnaJABY_H-4" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;6. Scadenza&lt;br&gt;della sessione&lt;br&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="MjYhxyYuJQHVnaJABY_H-3" vertex="1" connectable="0">
           <mxGeometry x="0.0169" relative="1" as="geometry">
             <mxPoint x="40" y="109" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MjYhxyYuJQHVnaJABY_H-9" value="" style="endArrow=none;html=1;rounded=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="MjYhxyYuJQHVnaJABY_H-8">
+        <mxCell id="MjYhxyYuJQHVnaJABY_H-9" value="" style="endArrow=none;html=1;rounded=0;entryDx=0;entryDy=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="300" y="420" as="sourcePoint" />
-            <mxPoint x="300" y="140" as="targetPoint" />
+            <mxPoint x="300" y="380" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MjYhxyYuJQHVnaJABY_H-8" value="" style="shape=waypoint;sketch=0;fillStyle=solid;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" vertex="1" parent="1">
-          <mxGeometry x="290" y="370" width="20" height="20" as="geometry" />
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-1" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Client&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="640" y="80" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="MjYhxyYuJQHVnaJABY_H-10" value="7. Distruzione&lt;br&gt;del token&lt;br&gt;al logout" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="300" y="350" width="100" height="60" as="geometry" />
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-2" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Server&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="820" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-3" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="VxC15GX-fJ9qcBJdqI63-22" target="VxC15GX-fJ9qcBJdqI63-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="700" y="420" as="sourcePoint" />
+            <mxPoint x="940" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-4" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="VxC15GX-fJ9qcBJdqI63-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="880" y="420" as="sourcePoint" />
+            <mxPoint x="890" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-5" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="180" as="sourcePoint" />
+            <mxPoint x="880" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-6" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;1. Autenticazione&lt;br&gt;{username, password}&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="VxC15GX-fJ9qcBJdqI63-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-7" value="" style="curved=1;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="890" y="180" as="sourcePoint" />
+            <mxPoint x="890" y="220" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="910" y="180" />
+              <mxPoint x="910" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-8" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;2. Creazione&amp;nbsp;&lt;br&gt;del&lt;br&gt;token&lt;br&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="VxC15GX-fJ9qcBJdqI63-7">
+          <mxGeometry x="-0.2194" y="-2" relative="1" as="geometry">
+            <mxPoint x="42" y="13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-9" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="220" as="sourcePoint" />
+            <mxPoint x="700" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-10" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;3. Token codificato&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="VxC15GX-fJ9qcBJdqI63-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-11" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="280" as="sourcePoint" />
+            <mxPoint x="880" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-12" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;4. Richiesta autenticata&lt;br&gt;&lt;p style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal; text-align: start;&quot; class=&quot;p1&quot;&gt;Authorization: Bearer token&lt;/p&gt;&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="VxC15GX-fJ9qcBJdqI63-11">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-17" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-13" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="320" as="sourcePoint" />
+            <mxPoint x="700" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-14" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Risorsa protetta&lt;/font&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="VxC15GX-fJ9qcBJdqI63-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-15" value="" style="curved=1;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="890" y="280" as="sourcePoint" />
+            <mxPoint x="890" y="320" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="910" y="280" />
+              <mxPoint x="910" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-16" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;5. Validazione&lt;br&gt;del token&lt;br&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="VxC15GX-fJ9qcBJdqI63-15">
+          <mxGeometry x="-0.2194" y="-2" relative="1" as="geometry">
+            <mxPoint x="41" y="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-17" value="" style="curved=1;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="690" y="220" as="sourcePoint" />
+            <mxPoint x="690" y="280" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="670" y="220" />
+              <mxPoint x="670" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-18" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Archiviazione&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="VxC15GX-fJ9qcBJdqI63-17">
+          <mxGeometry x="0.0169" relative="1" as="geometry">
+            <mxPoint x="-12" y="-41" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-19" value="" style="curved=1;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="690" y="350" as="sourcePoint" />
+            <mxPoint x="690" y="180" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="600" y="350" />
+              <mxPoint x="600" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-20" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;6. Scadenza&lt;br&gt;del token&lt;br&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="VxC15GX-fJ9qcBJdqI63-19">
+          <mxGeometry x="0.0169" relative="1" as="geometry">
+            <mxPoint x="40" y="109" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-21" value="" style="endArrow=none;html=1;rounded=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="VxC15GX-fJ9qcBJdqI63-22">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="700" y="420" as="sourcePoint" />
+            <mxPoint x="700" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-22" value="" style="shape=waypoint;sketch=0;fillStyle=solid;size=6;pointerEvents=1;points=[];fillColor=none;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="370" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-23" value="7. Distruzione&lt;br&gt;del token&lt;br&gt;al logout" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="700" y="350" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-24" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="379.62" as="sourcePoint" />
+            <mxPoint x="480" y="379.62" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-25" value="&lt;p style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal; font-size: 12px;&quot; class=&quot;p1&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;7. Eliminazione dal client&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; line-height: normal; font-size: 12px;&quot; class=&quot;p1&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;e notifica al server&lt;/font&gt;&lt;/p&gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="VxC15GX-fJ9qcBJdqI63-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-17" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-26" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Autenticazione con Cookie&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="260" y="40" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VxC15GX-fJ9qcBJdqI63-27" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Autenticazione con Token&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="670" y="40" width="250" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
